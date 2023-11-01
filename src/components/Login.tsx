@@ -1,56 +1,45 @@
 import styled from "@emotion/styled";
-// import axios from "axios";
+import axios from "axios";
+import { useState } from "react";
 
 function Login() {
-  // async function ucerRegister() {
-  //   try {
-  //     let respons = await axios.get(
-  //       "http://nimige2887-001-site1.etempurl.com/api/Sign/In"
-  //     );
-
-  //     console.log(respons);
-  //   } catch (error) {
-  //     alert(error);
-  //   }
-  // }
-
   return (
     <AllStyleLogin>
       <div className="login_page">
         <div className="container">
           <input type="checkbox" id="signup_toggle" />
-          {/* <form className="form"> */}
-          <div className="form_front">
-            <div className="form_details">Login</div>
-            <input placeholder="Username" className="input" type="text" />
-            <input placeholder="Password" className="input" type="text" />
-            <button className="btn">Login</button>
-            <span className="switch">
-              Don't have an account?&nbsp;
-              <label className="signup_tog" htmlFor="signup_toggle">
-                Sign Up
-              </label>
-            </span>
-          </div>
-          <div className="form_back">
-            <div className="form_details">SignUp</div>
-            <input placeholder="Firstname" className="input" type="text" />
-            <input placeholder="Username" className="input" type="text" />
-            <input placeholder="Password" className="input" type="text" />
-            <input
-              placeholder="Confirm Password"
-              className="input"
-              type="text"
-            />
-            <button className="btn">Signup</button>
-            <span className="switch">
-              Already have an account?&nbsp;
-              <label className="signup_tog" htmlFor="signup_toggle">
-                Sign In
-              </label>
-            </span>
-          </div>
-          {/* </form> */}
+          <form className="form">
+            <div className="form_front">
+              <div className="form_details">Login</div>
+              <input placeholder="Username" className="input" type="text" />
+              <input placeholder="Password" className="input" type="text" />
+              <button className="btn">Login</button>
+              <span className="switch">
+                Don't have an account?&nbsp;
+                <label className="signup_tog" htmlFor="signup_toggle">
+                  Sign Up
+                </label>
+              </span>
+            </div>
+            <div className="form_back">
+              <div className="form_details">SignUp</div>
+              <input placeholder="Firstname" className="input" type="text" />
+              <input placeholder="Username" className="input" type="text" />
+              <input placeholder="Password" className="input" type="text" />
+              <input
+                placeholder="Confirm Password"
+                className="input"
+                type="text"
+              />
+              <button className="btn">Signup</button>
+              <span className="switch">
+                Already have an account?&nbsp;
+                <label className="signup_tog" htmlFor="signup_toggle">
+                  Sign In
+                </label>
+              </span>
+            </div>
+          </form>
         </div>
       </div>
     </AllStyleLogin>
