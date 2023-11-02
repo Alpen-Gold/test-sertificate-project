@@ -1,233 +1,21 @@
 import styled from "@emotion/styled";
 
 // icons
-import CategoryIcon from "@mui/icons-material/Category";
-import StorefrontIcon from "@mui/icons-material/Storefront";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import StackedLineChartOutlinedIcon from "@mui/icons-material/StackedLineChartOutlined";
-import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
-import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
-import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
+
+import SliderMenu from "./SliderMenu";
+import { Outlet } from "react-router-dom";
 
 function LeyoutAdmin() {
-  // document.querySelector(".jsFilter").addEventListener("click", function () {
-  //   document.querySelector(".filter-menu").classList.toggle("active");
-  // });
-
-  // document.querySelector(".grid").addEventListener("click", function () {
-  //   document.querySelector(".list").classList.remove("active");
-  //   document.querySelector(".grid").classList.add("active");
-  //   document.querySelector(".products-area-wrapper").classList.add("gridView");
-  //   document
-  //     .querySelector(".products-area-wrapper")
-  //     .classList.remove("tableView");
-  // });
-
-  // document.querySelector(".list").addEventListener("click", function () {
-  //   document.querySelector(".list").classList.add("active");
-  //   document.querySelector(".grid").classList.remove("active");
-  //   document
-  //     .querySelector(".products-area-wrapper")
-  //     .classList.remove("gridView");
-  //   document.querySelector(".products-area-wrapper").classList.add("tableView");
-  // });
-
-  // var modeSwitch = document.querySelector(".mode-switch");
-  // modeSwitch.addEventListener("click", function () {
-  //   document.documentElement.classList.toggle("light");
-  //   modeSwitch.classList.toggle("active");
-  // });
-
   return (
     <AdminLeyoutWrapper>
       <div className="app-container">
-        <div className="sidebar">
-          <div className="sidebar-header">
-            <div className="app-icon">LOGO</div>
-          </div>
-          <ul className="sidebar-list">
-            <li className="sidebar-list-item">
-              <a href="#">
-                <HomeOutlinedIcon />
-                <span>Home</span>
-              </a>
-            </li>
+        {/* Slider page */}
+        <SliderMenu />
+        {/* Slider page end */}
 
-            <li className="sidebar-list-item">
-              <a href="#">
-                <StorefrontIcon />
-                <span>Products</span>
-              </a>
-            </li>
-
-            <li className="sidebar-list-item active">
-              <a href="#">
-                <CategoryIcon />
-                <span>Category</span>
-              </a>
-            </li>
-
-            <li className="sidebar-list-item">
-              <a href="#">
-                <StackedLineChartOutlinedIcon />
-                <span>Statistics</span>
-              </a>
-            </li>
-
-            <li className="sidebar-list-item">
-              <a href="#">
-                <PeopleAltOutlinedIcon />
-                <span>Ucers</span>
-              </a>
-            </li>
-
-            <li className="sidebar-list-item">
-              <a href="#">
-                <SettingsOutlinedIcon />
-                <span>Setting</span>
-              </a>
-            </li>
-          </ul>
-          <div className="account-info">
-            <div className="account-info-picture">
-              <img
-                src="https://images.unsplash.com/photo-1527736947477-2790e28f3443?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE2fHx3b21hbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                alt="Account"
-              />
-            </div>
-            <div className="account-info-name">Monica G.</div>
-          </div>
-        </div>
-        <div className="app-content">
-          <div className="app-content-header">
-            <h1 className="app-content-headerText">Products</h1>
-            <button className="mode-switch" title="Switch Theme">
-              <svg
-                className="moon"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <defs></defs>
-                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-              </svg>
-            </button>
-            <button className="app-content-headerButton">Add Product</button>
-          </div>
-          <div className="app-content-actions">
-            <input className="search-bar" placeholder="Search..." type="text" />
-            <div className="app-content-actions-wrapper">
-              <div className="filter-button-wrapper">
-                <button className="action-button filter jsFilter">
-                  <span>Filter</span>
-
-                  <FilterAltOutlinedIcon />
-                </button>
-                <div className="filter-menu">
-                  <label>Category</label>
-                  <select>
-                    <option>All Categories</option>
-                    <option>Furniture</option> <option>Decoration</option>
-                    <option>Kitchen</option>
-                    <option>Bathroom</option>
-                  </select>
-                  <label>Status</label>
-                  <select>
-                    <option>All Status</option>
-                    <option>Active</option>
-                    <option>Disabled</option>
-                  </select>
-                  <div className="filter-menu-buttons">
-                    <button className="filter-button reset">Reset</button>
-                    <button className="filter-button apply">Apply</button>
-                  </div>
-                </div>
-              </div>
-              <button className="action-button list " title="List View">
-                <DensityMediumOutlinedIcon />
-              </button>
-              <button className="action-button grid" title="Grid View">
-                <WindowOutlinedIcon />
-              </button>
-            </div>
-          </div>
-          <div className="products-area-wrapper tableView">
-            <div className="products-header">
-              <div className="product-cell image">Items</div>
-              <div className="product-cell category">Category</div>
-              <div className="product-cell status-cell">Status</div>
-              <div className="product-cell sales">Sales</div>
-              <div className="product-cell stock">Stock</div>
-              <div className="product-cell price">Price</div>
-            </div>
-
-            <div className="products-row">
-              <button className="cell-more-button">
-                <MoreVertOutlinedIcon />
-              </button>
-              <div className="product-cell image">
-                <img
-                  src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njd8fGludGVyaW9yfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
-                  alt="product"
-                />
-                <span>Sand</span>
-              </div>
-              <div className="product-cell category">
-                <span className="cell-label">Category:</span>Living Room
-              </div>
-              <div className="product-cell status-cell">
-                <span className="cell-label">Status:</span>
-                <span className="status disabled">Disabled</span>
-              </div>
-              <div className="product-cell sales">
-                <span className="cell-label">Sales:</span>52
-              </div>
-              <div className="product-cell stock">
-                <span className="cell-label">Stock:</span>16
-              </div>
-              <div className="product-cell price">
-                <span className="cell-label">Price:</span>$230
-              </div>
-            </div>
-
-            <div className="products-row">
-              <button className="cell-more-button">
-                <MoreVertOutlinedIcon />
-              </button>
-              <div className="product-cell image">
-                <img
-                  src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                  alt="product"
-                />
-                <span>Boheme</span>
-              </div>
-              <div className="product-cell category">
-                <span className="cell-label">Category:</span>Furniture
-              </div>
-              <div className="product-cell status-cell">
-                <span className="cell-label">Status:</span>
-                <span className="status active">Active</span>
-              </div>
-              <div className="product-cell sales">
-                <span className="cell-label">Sales:</span>32
-              </div>
-              <div className="product-cell stock">
-                <span className="cell-label">Stock:</span>40
-              </div>
-              <div className="product-cell price">
-                <span className="cell-label">Price:</span>$350
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Outlet All Pages  */}
+        <Outlet />
+        {/* Outlet All Pages end */}
       </div>
     </AdminLeyoutWrapper>
   );
@@ -309,7 +97,7 @@ const AdminLeyoutWrapper = styled.div`
     position: relative;
     margin-bottom: 4px;
   }
-  .sidebar-list-item a {
+  .sidebar-list-item .menu-link {
     display: flex;
     align-items: center;
     width: 100%;
@@ -639,6 +427,7 @@ const AdminLeyoutWrapper = styled.div`
     display: flex;
     align-items: center;
     border-radius: 4px;
+    margin: 5px 0;
   }
   .tableView .products-row:hover {
     box-shadow: var(--filter-shadow);
