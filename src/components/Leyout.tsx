@@ -2,7 +2,7 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -16,9 +16,12 @@ import MenuItem from "@mui/material/MenuItem";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import LocalGroceryStoreOutlinedIcon from "@mui/icons-material/LocalGroceryStoreOutlined";
+import { useSize } from "ahooks";
+import { useEffect } from "react";
 
 import logo from "../assets/img/Logo.png";
 import { NavLink, Outlet } from "react-router-dom";
+import MenuLeyout from "./MenuLeyout";
 
 const pages = ["Home", "Men", "Women", "Combos", "Joggers"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -65,15 +68,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 //seacrh
 
 function Leyout() {
+  const ref = React.useRef(null);
+  const size = useSize(ref);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [ekranSize, setEkranSize] = React.useState(size?.width);
+
+  useEffect(() => {
+    setEkranSize(size?.width);
+  }, [size?.width]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+
+  console.log(ekranSize, "salom");
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -86,7 +100,7 @@ function Leyout() {
   const [activeButton, setActiveButton] = React.useState(0);
 
   return (
-    <div>
+    <div ref={ref}>
       <AppBar
         position="sticky"
         style={{
@@ -97,23 +111,16 @@ function Leyout() {
       >
         <Container maxWidth="xl" style={{ padding: "0 60px" }}>
           <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              <img src={logo} alt="" />
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              {/* menu left element */}
+              {ekranSize !== undefined && ekranSize < 900 ? (
+                <MenuLeyout pages={pages} />
+              ) : null}
+              {/* menu left element end */}
+
+              <img src={logo} alt="none" />
+            </Box>
+
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -150,24 +157,7 @@ function Leyout() {
                 ))}
               </Menu>
             </Box>
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              <img src={logo} alt="" />
-            </Typography>
+
             <Box
               sx={{
                 flexGrow: 1,

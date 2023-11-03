@@ -1,10 +1,33 @@
 import styled from "@emotion/styled";
 import logoImg from "../assets/img/Logo.png";
 import signUpImg from "../assets/img/and-machines-vqTWfa4DjEk-unsplash 1.png";
+import axios from "axios";
 
 import { Container, TextField } from "@mui/material";
+import { useState } from "react";
 
 function Login() {
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [registerPasswordPrev, setRegisterPasswordPrev] = useState("");
+
+  const ucerR = async () => {
+    try {
+      const respons = await axios.post(
+        "http://192.168.1.48:8080/api/auth/register",
+        {
+          email: registerEmail,
+          password: registerPassword,
+          prePassword: registerPasswordPrev,
+        }
+      );
+
+      console.log(respons);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <AllStyleLogin>
       <div className="nav_top">
@@ -56,7 +79,29 @@ function Login() {
                 id="outlined-basic"
                 variant="outlined"
                 placeholder="salom"
+                label="email"
+                onChange={(e) => setRegisterEmail(e.target.value)}
               />
+
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                placeholder="salom"
+                label="Password"
+                onChange={(e) => setRegisterPassword(e.target.value)}
+              />
+
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                onChange={(e) => setRegisterPasswordPrev(e.target.value)}
+                placeholder="salom"
+                label="Password Pre"
+              />
+
+              <button className="all-button" onClick={ucerR}>
+                register
+              </button>
             </div>
           </div>
         </div>
@@ -97,7 +142,7 @@ const AllStyleLogin = styled.div`
   .wrapperForm {
     flex: 1;
     margin-right: 50px;
-    background-color: red;
+    // background-color: red;
   }
 
   .wrapper_btn {
