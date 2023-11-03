@@ -3,7 +3,7 @@ import logoImg from "../assets/img/Logo.png";
 import signUpImg from "../assets/img/and-machines-vqTWfa4DjEk-unsplash 1.png";
 import axios from "axios";
 
-import { Container, TextField } from "@mui/material";
+import { Box, Container, TextField } from "@mui/material";
 import { useState } from "react";
 
 function Login() {
@@ -45,21 +45,31 @@ function Login() {
         </Container>
       </div>
 
-      <div style={{ display: "flex", alignItems: "start", gap: "50px" }}>
-        <div className="wrapperImg">
+      <Box
+        sx={{ display: { xs: "block", md: "flex" } }}
+        style={{ alignItems: "start", gap: "50px" }}
+      >
+        <Box
+          sx={{ display: { xs: "none", md: "block" } }}
+          className="wrapperImg"
+        >
           <img
             src={signUpImg}
             alt="none"
             style={{ minWidth: "100%", maxHeight: "100%", objectFit: "cover" }}
           />
-        </div>
+        </Box>
 
-        <div className="wrapperForm">
+        <Box
+          sx={{ margin: { xs: "50px", md: "0 50px 0 0" } }}
+          className="wrapperForm"
+        >
           <h3 className="signin_text">Sign Up</h3>
 
           <p
             style={{
               color: "rgba(102, 102, 102, 0.80)",
+              textAlign: "center",
             }}
           >
             Sign up for free to access to in any of our products{" "}
@@ -74,38 +84,44 @@ function Login() {
               Continue With Google
             </button>
 
-            <div>
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                placeholder="salom"
-                label="email"
-                onChange={(e) => setRegisterEmail(e.target.value)}
-              />
+            <form style={{ marginTop: "16px" }}>
+              <div className="login_input">
+                <label htmlFor="email">Email</label>
+                <TextField
+                  id="email"
+                  variant="outlined"
+                  placeholder="Enter your email..."
+                  onChange={(e) => setRegisterEmail(e.target.value)}
+                />
+              </div>
 
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                placeholder="salom"
-                label="Password"
-                onChange={(e) => setRegisterPassword(e.target.value)}
-              />
+              <div className="login_input">
+                <label htmlFor="password">Password</label>
+                <TextField
+                  id="password"
+                  variant="outlined"
+                  placeholder="Enter your password..."
+                  onChange={(e) => setRegisterPassword(e.target.value)}
+                />
+              </div>
 
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                onChange={(e) => setRegisterPasswordPrev(e.target.value)}
-                placeholder="salom"
-                label="Password Pre"
-              />
+              <div className="login_input">
+                <label htmlFor="password Pre">Password Pre</label>
+                <TextField
+                  id="password Pre"
+                  variant="outlined"
+                  onChange={(e) => setRegisterPasswordPrev(e.target.value)}
+                  placeholder="Enter your password pre..."
+                />
+              </div>
 
-              <button className="all-button" onClick={ucerR}>
-                register
+              <button className="all-button register_btn" onClick={ucerR}>
+                Registration
               </button>
-            </div>
+            </form>
           </div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </AllStyleLogin>
   );
 }
@@ -118,9 +134,26 @@ const AllStyleLogin = styled.div`
     border-bottom: 1px solid #bebcbd;
   }
 
+  .register_btn {
+    margin-top: 10px;
+    padding: 12px;
+    width: 100%;
+  }
+
+  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 10px 14px;
+  }
+
+  .login_input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 4px;
+  }
+
   .cards_elements {
     width: 100%;
-    min-height: 100px;
+    min-height: 83px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -136,13 +169,11 @@ const AllStyleLogin = styled.div`
 
   .wrapperImg {
     flex: 1;
-    height: calc(100vh - 105px) !important;
+    height: calc(100vh - 88px) !important;
   }
 
   .wrapperForm {
     flex: 1;
-    margin-right: 50px;
-    // background-color: red;
   }
 
   .wrapper_btn {
@@ -184,5 +215,6 @@ const AllStyleLogin = styled.div`
     font-weight: 600;
     color: black;
     margin-bottom: 0;
+    text-align: center;
   }
 `;
