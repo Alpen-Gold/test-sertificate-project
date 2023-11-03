@@ -17,6 +17,24 @@ a {
 .all-button {
   padding: 10px 24px;
   border-radius: 8px;
+  font-size: 16px;
+  border: 1px solid #3c4242;
+  background-color: white;
+  color: #8a33fd;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.all-button:hover {
+  background-color: #8a33fd;
+  border: 1px solid transparent;
+  color: white;
+  transition: 0.4s;
+}
+
+.all-button-active {
+  padding: 10px 24px;
+  border-radius: 8px;
   background-color: #8a33fd;
   border: 1px solid transparent;
   color: white;
@@ -25,7 +43,7 @@ a {
   cursor: pointer;
 }
 
-.all-button:hover {
+.all-button-active:hover {
   border: 1px solid #3c4242;
   background-color: white;
   color: #8a33fd;
@@ -35,3 +53,5 @@ a {
 .active_menu_btn {
   color: #000 !important;
 }
+
+/*  */

@@ -161,7 +161,7 @@ function Leyout() {
                       marginRight: "10px",
                     }}
                   >
-                    <Person2OutlinedIcon sx={{}} />
+                    <Person2OutlinedIcon />
                   </button>
                 </Tooltip>
                 <button

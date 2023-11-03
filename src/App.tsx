@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 
 // import styled from "@emotion/styled";
 import "./App.css";
-import Login from "./components/LoginLeyout";
 import Leyout from "./components/Leyout";
 import LeyoutAdmin from "./admin-components/LeyoutAdmin";
 import ProductPage from "./admin-components/Pages/ProductPage";
@@ -10,6 +9,9 @@ import CategoryPage from "./admin-components/Pages/CategoryPages";
 import NotAdminPage from "./admin-components/Pages/NotAdminPage";
 import HomePage from "./components/pages/homePage";
 import MenPage from "./components/pages/menPage";
+import SignIn from "./components/pages-login/SignIn";
+import SignUp from "./components/pages-login/SignUp";
+import Login from "./components/LoginLeyout";
 
 function App() {
   return (
@@ -21,13 +23,19 @@ function App() {
           <Route path="men" element={<MenPage />}></Route>
           <Route path="*" element={<NotAdminPage />}></Route>
         </Route>
-        <Route path="/login" element={<Login />}></Route>
+
+        <Route path="/login" element={<Login />}>
+          <Route index element={<SignUp />}></Route>
+          <Route path="sign-up" element={<SignUp />}></Route>
+          <Route path="sign-in" element={<SignIn />}></Route>
+        </Route>
         <Route path="/leyout-admin" element={<LeyoutAdmin />}>
           <Route index element={<ProductPage />}></Route>
           <Route path="product" element={<ProductPage />}></Route>
           <Route path="category" element={<CategoryPage />}></Route>
           <Route path="*" element={<NotAdminPage />}></Route>
         </Route>
+        <Route path="*" element={<NotAdminPage />}></Route>
       </Routes>
 
       {/* <AppWrapper>

@@ -5,27 +5,39 @@ import axios from "axios";
 
 import { Box, Container, TextField } from "@mui/material";
 import { useState } from "react";
+import {
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useRoutes,
+} from "react-router-dom";
 
 function Login() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerPasswordPrev, setRegisterPasswordPrev] = useState("");
 
-  const ucerR = async () => {
-    try {
-      const respons = await axios.post(
-        "http://192.168.1.48:8080/api/auth/register",
-        {
-          email: registerEmail,
-          password: registerPassword,
-          prePassword: registerPasswordPrev,
-        }
-      );
+  const location = useLocation();
+  const navigate = useNavigate();
 
-      console.log(respons);
-    } catch (error) {
-      alert(error);
-    }
+  console.log("Path:", location.pathname);
+  const ucerR = async () => {
+    navigate("/home");
+
+    // try {
+    //   const respons = await axios.post(
+    //     "http://192.168.1.48:8080/api/auth/register",
+    //     {
+    //       email: registerEmail,
+    //       password: registerPassword,
+    //       prePassword: registerPasswordPrev,
+    //     }
+    //   );
+    //   console.log(respons);
+    // } catch (error) {
+    //   alert(error);
+    // }
   };
 
   return (
@@ -38,90 +50,35 @@ function Login() {
             </div>
 
             <div className="btn_box">
-              <button className="all-button">Login</button>
-              <button className="all-button">Sign Up</button>
+              <NavLink to={"sign-in"}>
+                <button
+                  className={
+                    location.pathname === "/sign-in"
+                      ? "all-button-active"
+                      : "all-button"
+                  }
+                >
+                  Sign In
+                </button>
+              </NavLink>
+
+              <NavLink to={"sign-up"}>
+                <button
+                  className={
+                    location.pathname === "/sign-up"
+                      ? "all-button-active"
+                      : "all-button"
+                  }
+                >
+                  Sign Up
+                </button>
+              </NavLink>
             </div>
           </div>
         </Container>
       </div>
 
-      <Box
-        sx={{ display: { xs: "block", md: "flex" } }}
-        style={{ alignItems: "start", gap: "50px" }}
-      >
-        <Box
-          sx={{ display: { xs: "none", md: "block" } }}
-          className="wrapperImg"
-        >
-          <img
-            src={signUpImg}
-            alt="none"
-            style={{ minWidth: "100%", maxHeight: "100%", objectFit: "cover" }}
-          />
-        </Box>
-
-        <Box
-          sx={{ margin: { xs: "50px", md: "0 50px 0 0" } }}
-          className="wrapperForm"
-        >
-          <h3 className="signin_text">Sign Up</h3>
-
-          <p
-            style={{
-              color: "rgba(102, 102, 102, 0.80)",
-              textAlign: "center",
-            }}
-          >
-            Sign up for free to access to in any of our products{" "}
-          </p>
-
-          <div className="wrapper_btn">
-            <button className="google">
-              <img
-                src="https://www.gstatic.com/images/branding/product/2x/googleg_24dp.png"
-                alt=""
-              />
-              Continue With Google
-            </button>
-
-            <form style={{ marginTop: "16px" }}>
-              <div className="login_input">
-                <label htmlFor="email">Email</label>
-                <TextField
-                  id="email"
-                  variant="outlined"
-                  placeholder="Enter your email..."
-                  onChange={(e) => setRegisterEmail(e.target.value)}
-                />
-              </div>
-
-              <div className="login_input">
-                <label htmlFor="password">Password</label>
-                <TextField
-                  id="password"
-                  variant="outlined"
-                  placeholder="Enter your password..."
-                  onChange={(e) => setRegisterPassword(e.target.value)}
-                />
-              </div>
-
-              <div className="login_input">
-                <label htmlFor="password Pre">Password Pre</label>
-                <TextField
-                  id="password Pre"
-                  variant="outlined"
-                  onChange={(e) => setRegisterPasswordPrev(e.target.value)}
-                  placeholder="Enter your password pre..."
-                />
-              </div>
-
-              <button className="all-button register_btn" onClick={ucerR}>
-                Registration
-              </button>
-            </form>
-          </div>
-        </Box>
-      </Box>
+      <Outlet />
     </AllStyleLogin>
   );
 }
