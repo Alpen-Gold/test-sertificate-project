@@ -1,5 +1,5 @@
 function MenPage() {
-  return <p>Men page </p>;
+  return <p>Men Pages </p>;
 }
 
 export default MenPage;

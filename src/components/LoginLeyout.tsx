@@ -53,7 +53,7 @@ function Login() {
               <NavLink to={"sign-in"}>
                 <button
                   className={
-                    location.pathname === "/sign-in"
+                    location.pathname === "/login/sign-in"
                       ? "all-button-active"
                       : "all-button"
                   }
@@ -65,7 +65,8 @@ function Login() {
               <NavLink to={"sign-up"}>
                 <button
                   className={
-                    location.pathname === "/sign-up"
+                    location.pathname === "/login/sign-up" ||
+                    location.pathname === "/login"
                       ? "all-button-active"
                       : "all-button"
                   }
@@ -97,6 +98,11 @@ const AllStyleLogin = styled.div`
     width: 100%;
   }
 
+  .sign_in_btn {
+    margin-top: 10px;
+    padding: 12px;
+  }
+
   .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
     padding: 10px 14px;
   }
@@ -122,7 +128,12 @@ const AllStyleLogin = styled.div`
     gap: 20px;
   }
 
-  // -------------------------------
+  .forgetRassword {
+    text-align: end;
+    margin-top: 5px;
+    color: grey;
+    text-decoration: underline;
+  }
 
   .wrapperImg {
     flex: 1;
@@ -172,6 +183,6 @@ const AllStyleLogin = styled.div`
     font-weight: 600;
     color: black;
     margin-bottom: 0;
-    text-align: center;
+    text-align: start;
   }
 `;

@@ -3,7 +3,7 @@ import logoImg from "../../assets/img";
 import signUpImg from "../../assets/img/and-machines-vqTWfa4DjEk-unsplash 1.png";
 import axios from "axios";
 
-import { Box, Container, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useState } from "react";
 import { NavLink, useLocation, useNavigate, useRoutes } from "react-router-dom";
 
@@ -58,18 +58,9 @@ function SignIn() {
         sx={{ margin: { xs: "50px", md: "0 50px 0 0" } }}
         className="wrapperForm"
       >
-        <h3 className="signin_text">Sign In</h3>
+        <h3 className="signin_text">Sign In Page</h3>
 
-        <p
-          style={{
-            color: "rgba(102, 102, 102, 0.80)",
-            textAlign: "center",
-          }}
-        >
-          Sign up for free to access to in any of our products
-        </p>
-
-        <div className="wrapper_btn">
+        <Box sx={{ mt: "30px" }} className="wrapper_btn">
           <button className="google">
             <img
               src="https://www.gstatic.com/images/branding/product/2x/googleg_24dp.png"
@@ -80,14 +71,15 @@ function SignIn() {
 
           <form style={{ marginTop: "16px" }}>
             <div className="login_input">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">User name or email address</label>
               <TextField
                 error
                 id="email"
                 variant="outlined"
+                type="email"
                 placeholder="Enter your email..."
                 onChange={(e) => setRegisterEmail(e.target.value)}
-                helperText="Enter email !"
+                helperText="Enter email!"
               />
             </div>
 
@@ -96,26 +88,26 @@ function SignIn() {
               <TextField
                 id="password"
                 variant="outlined"
+                type="password"
                 placeholder="Enter your password..."
                 onChange={(e) => setRegisterPassword(e.target.value)}
               />
+              <a href="#" className="forgetRassword">
+                Forget your password
+              </a>
             </div>
 
-            <div className="login_input">
-              <label htmlFor="password Pre">Password Pre</label>
-              <TextField
-                id="password Pre"
-                variant="outlined"
-                onChange={(e) => setRegisterPasswordPrev(e.target.value)}
-                placeholder="Enter your password pre..."
-              />
-            </div>
-
-            <button className="all-button register_btn" onClick={ucerR}>
-              Registration
+            <button className="all-button " onClick={ucerR}>
+              Sign In
             </button>
+
+            <Box sx={{ mt: "10px" }}>
+              <a href="#" className="forgetRassword">
+                Don’t have an account? Sign up
+              </a>
+            </Box>
           </form>
-        </div>
+        </Box>
       </Box>
     </Box>
   );

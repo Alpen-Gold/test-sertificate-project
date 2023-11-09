@@ -2,7 +2,8 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
+import styled from "styled-components";
+import { styled as styledm } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
@@ -25,7 +26,7 @@ const pages = ["Home", "Men", "Women", "Combos", "Joggers"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 //search
-const Search = styled("div")(({ theme }) => ({
+const Search = styledm("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   color: "#9b9ba2",
@@ -38,7 +39,7 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
+const SearchIconWrapper = styledm("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
   position: "absolute",
@@ -48,7 +49,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
+const StyledInputBase = styledm(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
@@ -89,7 +90,7 @@ function Leyout() {
   const [activeButton, setActiveButton] = React.useState(0);
 
   return (
-    <div ref={ref}>
+    <LoyautCss ref={ref}>
       <AppBar
         position="sticky"
         style={{
@@ -98,14 +99,23 @@ function Leyout() {
           zIndex: 100,
         }}
       >
-        <Container maxWidth="xl" style={{ padding: "0 60px" }}>
-          <Toolbar disableGutters>
-            <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
-              {/* menu left element */}
+        <Container>
+          <Toolbar
+            sx={{
+              justifyContent: "space-between",
+            }}
+            disableGutters
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "20px",
+              }}
+            >
               {ekranSize !== undefined && ekranSize < 900 ? (
                 <MenuLeyout pages={pages} />
               ) : null}
-              {/* menu left element end */}
 
               <img src={logo} alt="none" />
             </Box>
@@ -114,7 +124,7 @@ function Leyout() {
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
-                ml: 5,
+                ml: { xs: 0, md: 2, xl: 5 },
               }}
             >
               {pages.map((page: string, index) => (
@@ -123,11 +133,12 @@ function Leyout() {
                     className={index === activeButton ? "active_menu_btn " : ""}
                     sx={{
                       my: 2,
-                      px: 2,
+                      px: 1,
                       color: "#807d7e",
                       display: "block",
                       textTransform: "capitalize",
-                      fontWeight: "bold",
+                      fontWeight: "700",
+                      fontSize: { md: "14px", xl: "16px" },
                     }}
                   >
                     {page}
@@ -135,7 +146,7 @@ function Leyout() {
                 </NavLink>
               ))}
             </Box>
-            <Search sx={{ mr: 6, display: { xs: "none", md: "block" } }}>
+            <Search sx={{ mr: 4, display: { xs: "none", md: "block" } }}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
@@ -159,24 +170,31 @@ function Leyout() {
                       border: "none",
                       outline: "none",
                       marginRight: "10px",
+                      cursor: "pointer",
                     }}
                   >
                     <Person2OutlinedIcon />
                   </button>
                 </Tooltip>
-                <button
-                  style={{
-                    padding: "6px 0 4px",
-                    borderRadius: "6px",
-                    minWidth: "42px",
-                    color: "#807D7E",
-                    backgroundColor: "#F6F6F6",
-                    border: "none",
-                    outline: "none",
-                  }}
-                >
-                  <LocalGroceryStoreOutlinedIcon />
-                </button>
+                <NavLink to="cart">
+                  {({ isActive }) => (
+                    <button
+                      className={isActive ? "bg_active" : ""}
+                      style={{
+                        cursor: "pointer",
+                        padding: "6px 0 4px",
+                        borderRadius: "6px",
+                        minWidth: "42px",
+                        color: "#807D7E",
+                        backgroundColor: "#F6F6F6",
+                        border: "none",
+                        outline: "none",
+                      }}
+                    >
+                      <LocalGroceryStoreOutlinedIcon />
+                    </button>
+                  )}
+                </NavLink>
               </Box>
               <Menu
                 sx={{ mt: "45px" }}
@@ -207,8 +225,15 @@ function Leyout() {
       <div>
         <Outlet />
       </div>
-    </div>
+    </LoyautCss>
   );
 }
+
+const LoyautCss = styled.div`
+  .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+    padding: 8px 0;
+    color: #807d7e;
+  }
+`;
 
 export default Leyout;

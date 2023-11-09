@@ -12,6 +12,7 @@ import MenPage from "./components/pages/menPage";
 import SignIn from "./components/pages-login/SignIn";
 import SignUp from "./components/pages-login/SignUp";
 import Login from "./components/LoginLeyout";
+import CartPage from "./components/pages/cartPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route index element={<HomePage />}></Route>
           <Route path="home" element={<HomePage />}></Route>
           <Route path="men" element={<MenPage />}></Route>
+          <Route path="cart" element={<CartPage />}></Route>
           <Route path="*" element={<NotAdminPage />}></Route>
         </Route>
 

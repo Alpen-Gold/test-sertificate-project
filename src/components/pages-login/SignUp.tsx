@@ -63,7 +63,7 @@ function SignUn() {
         <p
           style={{
             color: "rgba(102, 102, 102, 0.80)",
-            textAlign: "center",
+            textAlign: "start",
           }}
         >
           Sign up for free to access to in any of our products
@@ -84,6 +84,7 @@ function SignUn() {
               <TextField
                 error
                 id="email"
+                type="email"
                 variant="outlined"
                 placeholder="Enter your email..."
                 onChange={(e) => setRegisterEmail(e.target.value)}
@@ -95,6 +96,7 @@ function SignUn() {
               <label htmlFor="password">Password</label>
               <TextField
                 id="password"
+                type="password"
                 variant="outlined"
                 placeholder="Enter your password..."
                 onChange={(e) => setRegisterPassword(e.target.value)}
@@ -105,6 +107,7 @@ function SignUn() {
               <label htmlFor="password Pre">Password Pre</label>
               <TextField
                 id="password Pre"
+                type="password"
                 variant="outlined"
                 onChange={(e) => setRegisterPasswordPrev(e.target.value)}
                 placeholder="Enter your password pre..."

@@ -15,27 +15,27 @@ a {
 }
 
 .all-button {
-  padding: 10px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  border: 1px solid #3c4242;
-  background-color: white;
-  color: #8a33fd;
-  transition: 0.4s;
-  cursor: pointer;
+  padding: 10px 27px !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  border: 1px solid #3c4242 !important;
+  background-color: white !important;
+  color: #8a33fd !important;
+  transition: 0.4s !important;
+  cursor: pointer !important;
 }
 
 .all-button:hover {
-  background-color: #8a33fd;
-  border: 1px solid transparent;
-  color: white;
-  transition: 0.4s;
+  background-color: #8a33fd !important;
+  border: 1px solid transparent !important;
+  color: white !important;
+  transition: 0.4s !important;
 }
 
 .all-button-active {
-  padding: 10px 24px;
+  padding: 10px 27px;
   border-radius: 8px;
-  background-color: #8a33fd;
+  background-color: #8a33fd !important;
   border: 1px solid transparent;
   color: white;
   font-size: 16px;
@@ -44,14 +44,26 @@ a {
 }
 
 .all-button-active:hover {
-  border: 1px solid #3c4242;
-  background-color: white;
+  border: 1px solid #3c4242 !important;
+  background-color: white !important;
   color: #8a33fd;
   transition: 0.4s;
 }
 
 .active_menu_btn {
   color: #000 !important;
+}
+
+.bg_active {
+  background-color: #8a33fd !important;
+  color: white !important;
+  transition: all 0.4s;
+}
+
+.bg_active:hover {
+  background-color: white !important;
+  color: #8a33fd !important;
+  transition: all 0.4s;
 }
 
 /*  */
