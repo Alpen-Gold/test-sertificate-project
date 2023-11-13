@@ -66,4 +66,8 @@ a {
   transition: all 0.4s;
 }
 
+.MuiContainer-root {
+  max-width: 1400px !important;
+}
+
 /*  */

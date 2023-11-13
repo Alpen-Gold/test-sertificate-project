@@ -13,6 +13,7 @@ import { Box, Container, Typography } from "@mui/material";
 import ZonePage from "./in_home_page/big_saving_zone";
 import CardMenPage from "./in_home_page/categories _for_men";
 import CardWomenPage from "./in_home_page/categories _for_women";
+import FooterPage from "../Footer";
 
 function HomePage() {
   return (
@@ -280,6 +281,8 @@ function HomePage() {
         <CardMenPage />
         <CardWomenPage />
       </Box>
+
+      <FooterPage />
     </AllStyleLogin>
   );
 }

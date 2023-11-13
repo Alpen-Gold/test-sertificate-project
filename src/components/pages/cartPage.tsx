@@ -9,6 +9,7 @@ import {
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { NavLink } from "react-router-dom";
 import CartCard from "../cartBuyProduct";
+import FooterPage from "../Footer";
 
 function CartPage() {
   return (
@@ -201,6 +202,8 @@ function CartPage() {
           </Box>
         </Box>
       </Container>
+
+      <FooterPage />
     </>
   );
 }

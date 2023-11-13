@@ -127,22 +127,24 @@ function Leyout() {
                 ml: { xs: 0, md: 2, xl: 5 },
               }}
             >
-              {pages.map((page: string, index) => (
-                <NavLink to={page.toLowerCase()} key={page}>
-                  <Button
-                    className={index === activeButton ? "active_menu_btn " : ""}
-                    sx={{
-                      my: 2,
-                      px: 1,
-                      color: "#807d7e",
-                      display: "block",
-                      textTransform: "capitalize",
-                      fontWeight: "700",
-                      fontSize: { md: "14px", xl: "16px" },
-                    }}
-                  >
-                    {page}
-                  </Button>
+              {pages.map((page: string, index: number) => (
+                <NavLink to={page.toLowerCase()} key={index}>
+                  {({ isActive }) => (
+                    <Button
+                      className={isActive ? "active_menu_btn " : ""}
+                      sx={{
+                        my: 2,
+                        px: 1,
+                        color: "#807d7e",
+                        display: "block",
+                        textTransform: "capitalize",
+                        fontWeight: "700",
+                        fontSize: { md: "14px", xl: "16px" },
+                      }}
+                    >
+                      {page}
+                    </Button>
+                  )}
                 </NavLink>
               ))}
             </Box>
