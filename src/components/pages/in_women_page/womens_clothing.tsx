@@ -1,4 +1,5 @@
 import { Box, Checkbox, Typography, Button } from "@mui/material";
+import styled from "styled-components";
 
 // images
 
@@ -122,84 +123,123 @@ function ClothingPage() {
     lg: "14px",
     xl: "16px",
   };
+  const start_end_size = {
+    xs: "16px",
+    sm: "20px",
+    md: "24px",
+    lg: "22px",
+    xl: "22px",
+  };
   return (
-    <Box sx={{ padding: { lg: "0 0 0 42px", xl: "0 0 0 42px" }, flex: 1 }}>
-      <Box className="Women_start_text">
-        <Typography className="start">Women’s Clothing</Typography>
-        <Typography
-          className="end"
-          sx={{ display: "flex", alignItems: "center" }}
-        >
-          <span>New</span> Recommended
-        </Typography>
-      </Box>
-      <Box className="main_popular_card_page">
-        {cards.map((card, index) => (
-          <Box
-            key={index}
+    <ClothingStyle>
+      <Box sx={{ padding: { lg: "0 0 0 42px", xl: "0 0 0 42px" }, flex: 1 }}>
+        <Box className="Women_start_text">
+          <Typography className="start" sx={{ fontSize: start_end_size }}>
+            Women’s Clothing
+          </Typography>
+          <Typography
+            className="end"
             sx={{
-              width: {
-                xs: "48%",
-                sm: "48%",
-                md: "32%",
-                lg: "32%",
-                xl: "32%",
-              },
-              marginBottom: "28px",
-              padding: "0 4px",
+              display: "flex",
+              alignItems: "center",
+              fontSize: start_end_size,
             }}
           >
-            <Box position={"relative"}>
-              <img src={card.img} className="img" />
-              <Checkbox
-                {...label}
-                icon={<FavoriteBorder sx={{ color: "red" }} />}
-                checkedIcon={<Favorite sx={{ color: "red" }} />}
-                sx={{
-                  position: "absolute",
-                  top: "6%",
-                  fontSize: "1px",
-                  right: "5%",
-                  padding: "6px",
-                  backgroundColor: "#fff",
-                }}
-              />
-            </Box>
-            <Box className="popular_card_text">
-              <div>
-                <Typography
+            <span>New</span> Recommended
+          </Typography>
+        </Box>
+        <Box className="main_popular_card_page">
+          {cards.map((card) => (
+            <Box
+              sx={{
+                width: {
+                  xs: "48%",
+                  sm: "48%",
+                  md: "32%",
+                  lg: "32%",
+                  xl: "32%",
+                },
+                marginBottom: "28px",
+                padding: "0 4px",
+              }}
+            >
+              <Box position={"relative"}>
+                <img src={card.img} className="img" />
+                <Checkbox
+                  {...label}
+                  icon={<FavoriteBorder sx={{ color: "red" }} />}
+                  checkedIcon={<Favorite sx={{ color: "red" }} />}
                   sx={{
-                    color: "#2A2F2F",
-                    fontWeight: "600",
-                    fontSize: card_info_size,
+                    position: "absolute",
+                    top: "6%",
+                    fontSize: "1px",
+                    right: "5%",
+                    padding: "6px",
+                    backgroundColor: "#fff",
+                  }}
+                />
+              </Box>
+              <Box className="popular_card_text">
+                <div>
+                  <Typography
+                    sx={{
+                      color: "#2A2F2F",
+                      fontWeight: "600",
+                      fontSize: card_info_size,
+                    }}
+                  >
+                    {card.info}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#797979",
+                      fontSize: card_bottom_info_size,
+                      fontWeight: "500",
+                    }}
+                  >
+                    {card.bottom_info}
+                  </Typography>
+                </div>
+                <Button
+                  className="btn_price"
+                  sx={{
+                    fontSize: card_price_size,
                   }}
                 >
-                  {card.info}
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "#797979",
-                    fontSize: card_bottom_info_size,
-                    fontWeight: "500",
-                  }}
-                >
-                  {card.bottom_info}
-                </Typography>
-              </div>
-              <Button
-                className="btn_price"
-                sx={{
-                  fontSize: card_price_size,
-                }}
-              >
-                {card.price}
-              </Button>
+                  {card.price}
+                </Button>
+              </Box>
             </Box>
-          </Box>
-        ))}
+          ))}
+        </Box>
       </Box>
-    </Box>
+    </ClothingStyle>
   );
 }
+
+const ClothingStyle = styled.div`
+  /* Women_start_text */
+  .Women_start_text {
+    margin: 48px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .start {
+    color: #3f4646;
+    font-weight: 600;
+  }
+  .end {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    color: #3f4646;
+    font-weight: 600;
+  }
+  .end span {
+    color: #8a33fd;
+  }
+  /* Women_start_text */
+`;
 
 export default ClothingPage;

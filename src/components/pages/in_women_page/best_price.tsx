@@ -31,6 +31,28 @@ const rows = [
 ];
 
 function BestPricePage() {
+  const h4_text_size = {
+    xs: "12px",
+    sm: "14px",
+    md: "16px",
+    lg: "20px",
+    xl: "20px",
+  };
+  const h3_text_size = {
+    xs: "14px",
+    sm: "16px",
+    md: "18px",
+    lg: "22px",
+    xl: "22px",
+  };
+
+  const main_text_size = {
+    xs: "20px",
+    sm: "24px",
+    md: "26px",
+    lg: "28px",
+    xl: "28px",
+  };
   return (
     <BestPriceStyle>
       <Box>
@@ -46,7 +68,7 @@ function BestPricePage() {
           <Typography
             sx={{
               fontWeight: "700",
-              fontSize: "28px",
+              fontSize: main_text_size,
               color: "#3C4242",
             }}
           >
@@ -54,10 +76,13 @@ function BestPricePage() {
           </Typography>
         </Box>
         <Box sx={{ margin: "32px 0", padding: "0 16px" }}>
-          <Typography className="h3">
+          <Typography className="h3" sx={{ fontSize: h3_text_size }}>
             Reexplore Women's Clothing Collection Online at Euphoria
           </Typography>
-          <Typography className="h4" sx={{ margin: "32px 0" }}>
+          <Typography
+            className="h4"
+            sx={{ margin: "32px 0", fontSize: h4_text_size }}
+          >
             Women's Clothing – Are you searching for the best website to buy
             Clothing for Women online in India? Well, your search for the
             coolest and most stylish womens clothing ends here. From trendy
@@ -65,14 +90,17 @@ function BestPricePage() {
             apparel, <span>Euphoria</span> has closet of Women Collection
             covered with the latest and best designs of Women's Clothing Online.
           </Typography>
-          <Typography className="h4">
+          <Typography className="h4" sx={{ fontSize: h4_text_size }}>
             Our collection of clothes for women will make you the trendsetter
             with an iconic resemblance of choice in Womens Wear.
           </Typography>
-          <Typography className="h3" sx={{ margin: "32px 0" }}>
+          <Typography
+            className="h3"
+            sx={{ margin: "32px 0", fontSize: h3_text_size }}
+          >
             One-Stop Destination to Shop Every Clothing for Women: Euphoria
           </Typography>
-          <Typography className="h4">
+          <Typography className="h4" sx={{ fontSize: h4_text_size }}>
             Today, Clothing for Women is gaining more popularity above all. This
             is because gone are the days when women were used to carrying
             uncomfortable fashion. Today, a lady looks prettier when she is in
@@ -80,7 +108,10 @@ function BestPricePage() {
             <span>Euphoria</span> has a big fat range of Stylish Women's
             Clothing that would make her the winner wherever she goes.
           </Typography>
-          <Typography className="h4" sx={{ margin: "32px 0" }}>
+          <Typography
+            className="h4"
+            sx={{ margin: "32px 0", fontSize: h4_text_size }}
+          >
             Our collection of clothes for women will make you the trendsetter
             with an iconic resemblance of choice in Womens Wear. It is quite
             evident to say that there are very few Womens Clothing online stores
@@ -88,7 +119,9 @@ function BestPricePage() {
             material and elegant design that you are always seeking for.
             Basically,
           </Typography>
-          <Typography className="h3">See More</Typography>
+          <Typography className="h3" sx={{ fontSize: h3_text_size }}>
+            See More
+          </Typography>
         </Box>
         <Box
           sx={{
@@ -102,7 +135,7 @@ function BestPricePage() {
           <Typography
             sx={{
               fontWeight: "700",
-              fontSize: "28px",
+              fontSize: main_text_size,
               color: "#3C4242",
             }}
           >
@@ -174,13 +207,11 @@ const BestPriceStyle = styled.div`
   }
   .h3 {
     color: #807d7e;
-    font-size: 22px;
     font-weight: 600;
   }
 
   .h4 {
     color: #807d7e;
-    font-size: 20px;
     font-weight: 400;
   }
   .h4 span {
