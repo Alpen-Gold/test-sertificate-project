@@ -5,20 +5,27 @@ import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
+import logo from "../assets/img/Logo.png";
+
+// import styled from "styled-components";
 
 type MenuType = {
   pages: string[];
 };
 
-export default function MenuLeyout({ pages }: MenuType) {
+// const MenuStyle = styled.div`
+//   .active_menu_btn {
+//     color: #000 !important;
+//   }
+// `;
+
+export default function MenuLayout({ pages }: MenuType) {
   const [state, setState] = React.useState({
     left: false,
+    activeItem: null,
   });
 
   const toggleDrawer =
@@ -35,7 +42,12 @@ export default function MenuLeyout({ pages }: MenuType) {
       setState({ ...state, [anchor]: open });
     };
 
+  const handleItemClick = (index: number) => {
+    setState({ ...state, activeItem: index, left: false });
+  };
+
   const list = (anchor: "left") => (
+    // <MenuStyle>
     <Box
       sx={{ width: 250 }}
       role="presentation"
@@ -43,13 +55,23 @@ export default function MenuLeyout({ pages }: MenuType) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
+        <div style={{ textAlign: "center" }}>
+          <img src={logo} alt="" />
+        </div>
+
         {pages.map((text: string, index: number) => (
-          <NavLink to={text.toLowerCase()} key={text}>
-            <ListItem key={text} disablePadding>
+          <NavLink to={text.toLowerCase()} key={index}>
+            <ListItem
+              key={text}
+              disablePadding
+              className={state.activeItem === index ? "active_menu_btn" : ""}
+              onClick={() => handleItemClick(index)}
+              style={{
+                color:
+                  state.activeItem === index ? "#000 !important" : "#807D7E",
+              }}
+            >
               <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
@@ -57,6 +79,7 @@ export default function MenuLeyout({ pages }: MenuType) {
         ))}
       </List>
     </Box>
+    // </MenuStyle>
   );
 
   return (

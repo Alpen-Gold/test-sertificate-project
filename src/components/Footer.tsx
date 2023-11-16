@@ -160,11 +160,20 @@ function FooterPage() {
             sx={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: { xs: "center", lg: "space-between" },
               gap: "20px",
+              flexWrap: "wrap",
+              padding: "0 20px",
+              marginTop: "14px",
             }}
           >
-            <Stack direction="row" spacing={1}>
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{
+                order: { xs: "2", md: "1" },
+              }}
+            >
               <IconButton className="btn_contacts">
                 <FacebookIcon />
               </IconButton>
@@ -178,9 +187,19 @@ function FooterPage() {
                 <LinkedInIcon />
               </IconButton>
             </Stack>
-            <Box>
+            <Box
+              sx={{
+                order: { xs: "1", md: "2" },
+              }}
+            >
               <div>
-                <Typography sx={{ fontSize: "22px", color: "white" }}>
+                <Typography
+                  sx={{
+                    fontSize: "22px",
+                    color: "white",
+                    textAlign: { xs: "center", md: "start" },
+                  }}
+                >
                   Download The App
                 </Typography>
               </div>
@@ -188,6 +207,14 @@ function FooterPage() {
               <img src={app_store} />
             </Box>
           </Box>
+          <Typography
+            className="footer_end"
+            sx={{
+              fontSize: { xs: "12px", sm: "16px", md: "18px", xl: "22px" },
+            }}
+          >
+            Copyright © 2023 Euphoria Folks Pvt Ltd. All rights reserved.
+          </Typography>
         </Container>
       </footer>
     </FooterStyle>
@@ -220,7 +247,6 @@ const FooterStyle = styled.div`
   .list_element {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     color: #f6f6f6;
     gap: 12px;
     margin: 20px 0;
@@ -231,6 +257,13 @@ const FooterStyle = styled.div`
   }
   .h2_footer {
     font-weight: 500;
+  }
+
+  .footer_end {
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 40px;
   }
 `;
 

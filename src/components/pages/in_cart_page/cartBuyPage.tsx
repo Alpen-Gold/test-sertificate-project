@@ -9,10 +9,10 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import FooterPage from "../Footer";
+import FooterPage from "../../Footer";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import foto from "../../assets/img/girl-1.jpg";
+import foto from "../../../assets/img/girl-1.jpg";
 
 function CartBuyPage() {
   const [isOpen, setIsOpen] = useState(false);

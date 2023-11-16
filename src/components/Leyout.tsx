@@ -66,6 +66,21 @@ const StyledInputBase = styledm(InputBase)(({ theme }) => ({
 }));
 //seacrh
 
+//
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+
+const ElevationScroll = ({ children }) => {
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+};
+//
+
 function Leyout() {
   const ref = React.useRef(null);
   const size = useSize(ref);
@@ -86,104 +101,100 @@ function Leyout() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  //////
+  const [showBorder, setShowBorder] = React.useState(false);
 
-  const [activeButton, setActiveButton] = React.useState(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBorder(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  //////
 
   return (
     <LoyautCss ref={ref}>
-      <AppBar
-        position="sticky"
-        style={{
-          backgroundColor: "#fff",
-          boxShadow: "0 4px 4px 0 #00000011",
-          zIndex: 100,
-        }}
-      >
-        <Container>
-          <Toolbar
-            sx={{
-              justifyContent: "space-between",
-            }}
-            disableGutters
-          >
-            <Box
+      <ElevationScroll>
+        <AppBar
+          position="sticky"
+          sx={{
+            backgroundColor: "#fff",
+            boxShadow: showBorder ? "0 4px 4px 0 #00000011" : "none",
+            borderBottom: showBorder ? "none" : "1px solid #BEBCBD",
+            zIndex: 100,
+          }}
+        >
+          <Container>
+            <Toolbar
               sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "20px",
+                justifyContent: "space-between",
               }}
+              disableGutters
             >
-              {ekranSize !== undefined && ekranSize < 900 ? (
-                <MenuLeyout pages={pages} />
-              ) : null}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "20px",
+                }}
+              >
+                {ekranSize !== undefined && ekranSize < 900 ? (
+                  <MenuLeyout pages={pages} />
+                ) : null}
 
-              <img src={logo} alt="none" />
-            </Box>
+                <img src={logo} alt="none" />
+              </Box>
 
-            <Box
-              sx={{
-                flexGrow: 1,
-                display: { xs: "none", md: "flex" },
-                ml: { xs: 0, md: 2, xl: 5 },
-              }}
-            >
-              {pages.map((page: string, index: number) => (
-                <NavLink to={page.toLowerCase()} key={index}>
-                  {({ isActive }) => (
-                    <Button
-                      className={isActive ? "active_menu_btn " : ""}
-                      sx={{
-                        my: 2,
-                        px: 1,
-                        color: "#807d7e",
-                        display: "block",
-                        textTransform: "capitalize",
-                        fontWeight: "700",
-                        fontSize: { md: "14px", xl: "16px" },
-                      }}
-                    >
-                      {page}
-                    </Button>
-                  )}
-                </NavLink>
-              ))}
-            </Box>
-            <Search sx={{ mr: 4, display: { xs: "none", md: "block" } }}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  display: { xs: "none", md: "flex" },
+                  ml: { xs: 0, md: 2, xl: 5 },
+                }}
+              >
+                {pages.map((page: string, index: number) => (
+                  <NavLink to={page.toLowerCase()} key={index}>
+                    {({ isActive }) => (
+                      <Button
+                        className={isActive ? "active_menu_btn " : ""}
+                        sx={{
+                          my: 2,
+                          px: 1,
+                          color: "#807d7e",
+                          display: "block",
+                          textTransform: "capitalize",
+                          fontWeight: "700",
+                          fontSize: { md: "14px", xl: "16px" },
+                        }}
+                      >
+                        {page}
+                      </Button>
+                    )}
+                  </NavLink>
+                ))}
+              </Box>
+              <Search sx={{ mr: 4, display: { xs: "none", md: "block" } }}>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
 
-            <Box sx={{ flexGrow: 0 }}>
-              <Box sx={{ display: { md: "flex" } }}>
-                <Tooltip title="Open settings">
-                  <button
-                    onClick={handleOpenUserMenu}
-                    style={{
-                      padding: "6px 0 4px",
-                      borderRadius: "6px",
-                      minWidth: "42px",
-                      color: "#807D7E",
-                      backgroundColor: "#F6F6F6",
-                      border: "none",
-                      outline: "none",
-                      marginRight: "10px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <Person2OutlinedIcon />
-                  </button>
-                </Tooltip>
-                <NavLink to="cart">
-                  {({ isActive }) => (
+              <Box sx={{ flexGrow: 0 }}>
+                <Box sx={{ display: { md: "flex" } }}>
+                  <Tooltip title="Open settings">
                     <button
-                      className={isActive ? "bg_active" : ""}
+                      onClick={handleOpenUserMenu}
                       style={{
-                        cursor: "pointer",
                         padding: "6px 0 4px",
                         borderRadius: "6px",
                         minWidth: "42px",
@@ -191,39 +202,61 @@ function Leyout() {
                         backgroundColor: "#F6F6F6",
                         border: "none",
                         outline: "none",
+                        marginRight: "10px",
+                        cursor: "pointer",
                       }}
                     >
-                      <LocalGroceryStoreOutlinedIcon />
+                      <Person2OutlinedIcon />
                     </button>
-                  )}
-                </NavLink>
+                  </Tooltip>
+                  <NavLink to="cart">
+                    {({ isActive }) => (
+                      <button
+                        className={isActive ? "bg_active" : ""}
+                        style={{
+                          cursor: "pointer",
+                          padding: "6px 0 4px",
+                          borderRadius: "6px",
+                          minWidth: "42px",
+                          color: "#807D7E",
+                          backgroundColor: "#F6F6F6",
+                          border: "none",
+                          outline: "none",
+                        }}
+                      >
+                        <LocalGroceryStoreOutlinedIcon />
+                      </button>
+                    )}
+                  </NavLink>
+                </Box>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
               </Box>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </ElevationScroll>
+
       <div>
         <Outlet />
       </div>
