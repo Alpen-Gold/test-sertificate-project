@@ -14,6 +14,8 @@ import ZonePage from "./in_home_page/big_saving_zone";
 import CardMenPage from "./in_home_page/categories _for_men";
 import CardWomenPage from "./in_home_page/categories _for_women";
 import FooterPage from "../Footer";
+import Limelight from "./in_home_page/in_the_limelight";
+import BrendPage from "./in_home_page/brend_page";
 
 function HomePage() {
   return (
@@ -280,6 +282,8 @@ function HomePage() {
         <ZonePage />
         <CardMenPage />
         <CardWomenPage />
+        <BrendPage />
+        <Limelight />
       </Box>
 
       <FooterPage />

@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Box, Container, Typography, TextField } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { NavLink } from "react-router-dom";
 import CartCard from "../cartBuyProduct";
@@ -194,9 +187,11 @@ function CartPage() {
               </Box>
 
               <Box sx={{ mt: "30px", textAlign: "center" }}>
-                <button className="all-button-active">
-                  Proceed To Checkout
-                </button>
+                <NavLink to={"/buy-my-cart"}>
+                  <button className="all-button-active">
+                    Proceed To Checkout
+                  </button>
+                </NavLink>
               </Box>
             </Box>
           </Box>

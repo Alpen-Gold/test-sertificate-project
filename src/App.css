@@ -1,13 +1,28 @@
 html {
   scroll-behavior: smooth;
 }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif !important;
 }
-* {
-  box-sizing: border-box;
+
+body::-webkit-scrollbar {
+  background: transparent;
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #d9d9ed;
+  border-radius: 40px;
 }
 
 a {
