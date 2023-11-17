@@ -1,331 +1,42 @@
-import {
-  Container,
-  Button,
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Slider,
-  ListItemButton,
-} from "@mui/material";
-
+import { Container, Box } from "@mui/material";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import FooterPage from "../Footer";
 import BestPricePage from "./in_men_page/best_price";
 import ClothingPage from "./in_men_page/mens_clothing";
 
 //icons
 
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import TuneIcon from "@mui/icons-material/Tune";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MenLeyout from "./in_men_page/menLeyout";
+import { useSize } from "ahooks";
+import ManMenuLeyout from "./in_men_page/ManMenuLeyout";
 
 //icons
 
-function valuetext(value: number) {
-  return `${value}°C`;
-}
+function ManPage() {
+  const ref = useRef(null);
+  const size = useSize(ref);
 
-const colors = [
-  {
-    col: "#8434E1",
-    name: "Purple",
-  },
-  {
-    col: "#252525",
-    name: "Black",
-  },
-  {
-    col: "#F35528",
-    name: "Red",
-  },
-  {
-    col: "#F16F2B",
-    name: "Orange",
-  },
-  {
-    col: "#345EFF",
-    name: "Navy",
-  },
-  {
-    col: "#FFF",
-    name: "White",
-  },
-  {
-    col: "#D67E3B",
-    name: "Broom",
-  },
-  {
-    col: "#48BC4E",
-    name: "Green",
-  },
-  {
-    col: "#FDC761",
-    name: "Yellow",
-  },
-  {
-    col: "#E4E5E8",
-    name: "Grey",
-  },
-  {
-    col: "#E08D9D",
-    name: "Pink",
-  },
-  {
-    col: "#3FDEFF",
-    name: "Blue",
-  },
-];
+  const [ekranSize, setEkranSize] = React.useState(size?.width);
 
-const btnSize = ["XXL", "XL", "XS", "S", "M", "L", "XXL", "3XL", "4XL"];
-const clothes = [
-  "Tops",
-  "Printed T-shirts",
-  "Plain T-shirts",
-  "Kurti",
-  "Boxers",
-  "Full sleeve T-shirts",
-  "Joggers",
-  "Payjamas",
-  "Jeans",
-];
-
-const dressStyle = [
-  "Classic",
-  "Casual",
-  "Business",
-  "Sport",
-  "Elegant",
-  "Formal (evening)",
-];
-
-function WomenPage() {
-  const [value, setValue] = useState<number[]>([30, 70]);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number[]);
-  };
+  useEffect(() => {
+    setEkranSize(size?.width);
+  }, [size?.width]);
 
   return (
-    <WomenStyle>
+    <WomenStyle ref={ref}>
       <Container>
         <Box sx={{ display: "flex" }}>
-          <Box
-            sx={{
-              width: "100%",
-              maxWidth: 300,
-              border: "2px solid #BEBCBD77",
-              borderTop: "0",
-              height: "100%",
-              display: { xs: "none", sm: "none", md: "none", lg: "block" },
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "16px 26px",
-                color: "#807D7E",
-              }}
-            >
-              <Typography sx={{ fontSize: "22px" }}>Filter</Typography>
-              <Button sx={{ minWidth: 0, padding: 0, color: "#807D7E" }}>
-                <TuneIcon sx={{ transform: "rotate(90deg)" }} />
-              </Button>
-            </Box>
-            <Divider sx={{ borderBottomWidth: "2px" }} />
-            <List
-              sx={{ margin: "16px 0" }}
-              component="nav"
-              aria-label="mailbox folders"
-            >
-              {clothes.map((cloth) => (
-                <ListItem>
-                  <ListItemText primary={cloth} />
-                  <Button>
-                    <ChevronRightIcon />
-                  </Button>
-                </ListItem>
-              ))}
-            </List>
-            <Divider sx={{ borderBottomWidth: "2px" }} />
-            <Accordion
-              defaultExpanded={true}
-              sx={{
-                border: "0",
-                boxShadow: "none",
-                position: "static",
-              }}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                sx={{ padding: "0 26px" }}
-              >
-                <Typography className="draw_menu">Price</Typography>
-              </AccordionSummary>
-              <Divider sx={{ borderBottomWidth: "2px" }} />
-              <AccordionDetails sx={{ padding: "0 26px" }}>
-                <Box sx={{ width: "100%", padding: "32px 0 16px" }}>
-                  <Slider
-                    getAriaLabel={() => "Temperature range"}
-                    value={value}
-                    onChange={handleChange}
-                    valueLabelDisplay="auto"
-                    getAriaValueText={valuetext}
-                  />
-                  <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Button
-                      variant="outlined"
-                      className="btn_price_control"
-                      sx={{ padding: 0, borderRadius: "8px", minWidth: "80px" }}
-                    >
-                      $70
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      className="btn_price_control"
-                      sx={{
-                        padding: 0,
-                        borderRadius: "8px",
-                        minWidth: "80px",
-                      }}
-                    >
-                      $160
-                    </Button>
-                  </Box>
-                </Box>
-              </AccordionDetails>
-            </Accordion>
-            <Divider sx={{ borderBottomWidth: "2px" }} />
-            <Accordion
-              defaultExpanded={true}
-              sx={{
-                border: "0",
-                boxShadow: "none",
-                position: "static",
-              }}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                sx={{ padding: "0 26px" }}
-              >
-                <Typography className="draw_menu">Colors</Typography>
-              </AccordionSummary>
-              <Divider sx={{ borderBottomWidth: "2px" }} />
-              <AccordionDetails sx={{ padding: "0 26px" }}>
-                <Box
-                  sx={{
-                    width: "100%",
-                    padding: "16px 0 32px 0",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  {colors.map((color) => (
-                    <Box className="main_box">
-                      <Box className="in_main_box">
-                        <ListItemButton
-                          sx={{
-                            backgroundColor: color.col,
-                            "&:hover": {
-                              backgroundColor: color.col,
-                            },
-                          }}
-                          className="color_box"
-                        ></ListItemButton>
-                        <Typography>{color.name}</Typography>
-                      </Box>
-                    </Box>
-                  ))}
-                </Box>
-              </AccordionDetails>
-            </Accordion>
-            <Divider sx={{ borderBottomWidth: "2px" }} />
-            <Accordion
-              defaultExpanded={true}
-              sx={{
-                border: "0",
-                boxShadow: "none",
-                position: "static",
-              }}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                sx={{ padding: "0 26px" }}
-              >
-                <Typography className="draw_menu">Size</Typography>
-              </AccordionSummary>
-              <Divider sx={{ borderBottomWidth: "2px" }} />
-              <AccordionDetails sx={{ padding: "0 26px" }}>
-                <Box sx={{ width: "100%", padding: "16px 0 32px 0" }}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    {btnSize.map((size) => (
-                      <Button variant="outlined" className="btn_size">
-                        {size}
-                      </Button>
-                    ))}
-                  </Box>
-                </Box>
-              </AccordionDetails>
-            </Accordion>
-            <Divider sx={{ borderBottomWidth: "2px" }} />
-            <Accordion
-              defaultExpanded={true}
-              sx={{
-                border: "0",
-                boxShadow: "none",
-                position: "static",
-              }}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                sx={{ padding: "0 26px" }}
-              >
-                <Typography className="draw_menu">Dress Style</Typography>
-              </AccordionSummary>
-              <Divider sx={{ borderBottomWidth: "2px" }} />
-              <AccordionDetails sx={{ padding: 0 }}>
-                <List
-                  sx={{ margin: "16px 0" }}
-                  component="nav"
-                  aria-label="mailbox folders"
-                >
-                  {dressStyle.map((dress) => (
-                    <ListItem>
-                      <ListItemText primary={dress} />
-                      <Button>
-                        <ChevronRightIcon />
-                      </Button>
-                    </ListItem>
-                  ))}
-                </List>
-              </AccordionDetails>
-            </Accordion>
-          </Box>
+          {/* men Leyout page */}
+
+          {ekranSize !== undefined && ekranSize < 1200 ? (
+            <ManMenuLeyout />
+          ) : (
+            <MenLeyout />
+          )}
+
+          {/* men Leyout page */}
+
           {/*  _content_  */}
           <ClothingPage />
           {/*  _content_  */}
@@ -435,4 +146,4 @@ const WomenStyle = styled.div`
   ///cards
 `;
 
-export default WomenPage;
+export default ManPage;

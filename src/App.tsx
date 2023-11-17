@@ -8,7 +8,7 @@ import ProductPage from "./admin-components/Pages/ProductPage";
 import CategoryPage from "./admin-components/Pages/CategoryPages";
 import NotAdminPage from "./admin-components/Pages/NotAdminPage";
 import HomePage from "./components/pages/homePage";
-import MenPage from "./components/pages/menPage";
+import ManPage from "./components/pages/menPage";
 import SignIn from "./components/pages-login/SignIn";
 import SignUp from "./components/pages-login/SignUp";
 import Login from "./components/LoginLeyout";
@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={<Leyout />}>
           <Route index element={<HomePage />}></Route>
           <Route path="home" element={<HomePage />}></Route>
-          <Route path="men" element={<MenPage />}></Route>
+          <Route path="men" element={<ManPage />}></Route>
           <Route path="women" element={<WomenPage />}></Route>
           <Route path="cart" element={<CartPage />}></Route>
           <Route path="buy-my-cart" element={<CartBuyPage />}></Route>
