@@ -13,6 +13,10 @@ import FooterPage from "../../Footer";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import foto from "../../../assets/img/girl-1.jpg";
+import fotoVisa from "../../../assets/img/Frame 441.png";
+import fotoGoogle from "../../../assets/img/Frame 440.png";
+import fotoPaypal from "../../../assets/img/Frame 442.png";
+import fotoPayPas from "../../../assets/img/Frame 443.png";
 
 function CartBuyPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,8 +90,7 @@ function CartBuyPage() {
         <Box
           sx={{
             display: "flex",
-            // alignItems: "center",
-            // justifyContent: "space-between",
+            alignItems: "start",
             gap: "40px",
             mb: "30px",
           }}
@@ -111,6 +114,7 @@ function CartBuyPage() {
                 <label htmlFor="userNameEmail">First Name*</label>
 
                 <TextField
+                  type="text"
                   id="userNameEmail"
                   variant="outlined"
                   placeholder="First Name"
@@ -128,6 +132,7 @@ function CartBuyPage() {
                 <label htmlFor="lastName">Last Name*</label>
 
                 <TextField
+                  type="text"
                   id="lastName"
                   variant="outlined"
                   placeholder="Last Name"
@@ -153,6 +158,7 @@ function CartBuyPage() {
                 <label htmlFor="countryRegion">Country / Region*</label>
 
                 <TextField
+                  type="text"
                   id="countryRegion"
                   variant="outlined"
                   placeholder="Country / Region"
@@ -169,6 +175,7 @@ function CartBuyPage() {
                 <label htmlFor="companyName">Company Name</label>
 
                 <TextField
+                  type="text"
                   id="companyName"
                   variant="outlined"
                   placeholder="Company (optional)"
@@ -194,6 +201,7 @@ function CartBuyPage() {
                 <label htmlFor="streetAddres">Street Address*</label>
 
                 <TextField
+                  type="text"
                   id="streetAddres"
                   variant="outlined"
                   placeholder="House number and street name"
@@ -210,6 +218,7 @@ function CartBuyPage() {
                 <label htmlFor="aptSuiteUnit">Apt, suite, unit</label>
 
                 <TextField
+                  type="text"
                   id="aptSuiteUnit"
                   variant="outlined"
                   placeholder="apartment, suite, unit, etc. (optional)"
@@ -235,6 +244,7 @@ function CartBuyPage() {
                 <label htmlFor="city">City*</label>
 
                 <TextField
+                  type="text"
                   id="city"
                   variant="outlined"
                   placeholder="Town / City"
@@ -291,6 +301,7 @@ function CartBuyPage() {
                 <label htmlFor="postalCode">Postal Code*</label>
 
                 <TextField
+                  type="text"
                   id="postalCode"
                   variant="outlined"
                   placeholder="Postal Code"
@@ -309,7 +320,12 @@ function CartBuyPage() {
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <label htmlFor="phone">Phone*</label>
 
-                <TextField id="phone" variant="outlined" placeholder="Phone" />
+                <TextField
+                  id="phone"
+                  variant="outlined"
+                  placeholder="Phone"
+                  type="text"
+                />
               </Box>
             </Box>
 
@@ -326,7 +342,122 @@ function CartBuyPage() {
                 />
               </FormGroup>
             </Box>
+
+            <Box sx={{ mt: "60px" }}>
+              <Typography sx={{ fontSize: "22px", fontWeight: 700 }}>
+                Shipping Method
+              </Typography>
+
+              <Box
+                sx={{
+                  mt: "20px",
+                  bgcolor: "#F6F6F6",
+                  padding: "20px",
+                  borderRadius: "14px",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: "20px",
+                    fontWeight: "600",
+                    borderRadius: "12px",
+                    mb: "10px",
+                  }}
+                >
+                  Arrives by Monday, June 7
+                </Typography>
+
+                <hr />
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    mt: "20px",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "17px",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Delivery Charges
+                  </Typography>
+
+                  <Typography
+                    sx={{
+                      fontSize: "17px",
+                      fontWeight: "600",
+                    }}
+                  >
+                    $5.00
+                  </Typography>
+                </Box>
+
+                <Typography sx={{ color: "#807D7E", fontSize: "13px" }}>
+                  Additional fess may apply
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                mt: "80px",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "20px",
+                  fontWeight: "600",
+                  borderRadius: "12px",
+                  mt: "100px",
+                }}
+              >
+                Arrives by Monday, June 7
+              </Typography>
+
+              <Typography
+                sx={{ color: "#3C4242", fontSize: "16px", mt: "10px" }}
+              >
+                All transactions are secure and encrypted.
+              </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                mt: "20px",
+                bgcolor: "red",
+                padding: "20px",
+                borderRadius: "14px",
+              }}
+            >
+              <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                <img
+                  src={fotoGoogle}
+                  alt="none"
+                  style={{ cursor: "pointer" }}
+                />
+
+                <img src={fotoVisa} alt="none" style={{ cursor: "pointer" }} />
+
+                <img
+                  src={fotoPaypal}
+                  alt="none"
+                  style={{ cursor: "pointer" }}
+                />
+
+                <img
+                  src={fotoPayPas}
+                  alt="none"
+                  style={{ cursor: "pointer" }}
+                />
+              </Box>
+            </Box>
           </Box>
+
+          {/* center cards */}
 
           <Box
             sx={{
@@ -526,18 +657,6 @@ function CartBuyPage() {
                 </Typography>
               </Box>
             </Box>
-          </Box>
-        </Box>
-
-        <Box>
-          <Box>
-            <Typography sx={{ fontSize: "22px", fontWeight: 700 }}>
-              Payment Method
-            </Typography>
-
-            <Typography sx={{ fontSize: "15px", mt: "5px" }}>
-              All transactions are secure and encrypted.
-            </Typography>
           </Box>
         </Box>
       </Container>

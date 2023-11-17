@@ -9,7 +9,33 @@ import women_card_3 from "../../../assets/img/women_card_3.png";
 import women_card_4 from "../../../assets/img/women_card_4.png";
 // img_men_page
 
+const WomenData = [
+  {
+    img: women_card_1,
+    info: "Hoodies & Sweetshirt",
+  },
+  {
+    img: women_card_2,
+    info: "Coats & Parkas",
+  },
+  {
+    img: women_card_3,
+    info: "Tees & T-Shirt",
+  },
+  {
+    img: women_card_4,
+    info: "Boxers",
+  },
+];
+
 function CardWomenPage() {
+  const card_width = {
+    xs: "48%",
+    sm: "48%",
+    md: "32%",
+    lg: "23.5%",
+    xl: "23.5%",
+  };
   return (
     <MenStyleCss>
       <Container>
@@ -33,138 +59,52 @@ function CardWomenPage() {
           </Typography>
         </Box>
         <Box className="main_women_card_page">
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={women_card_1} className="img" />
-            <Box className="women_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Hoodies & Sweetshirt
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
+          {WomenData.map((women) => (
+            <Box sx={{ width: card_width }}>
+              <Box>
+                <img src={women.img} className="img" />
+              </Box>
+              <Box className="women_card_text">
+                <div>
+                  <Typography
+                    sx={{
+                      color: "#2A2F2F",
+                      fontWeight: "700",
+                      fontSize: {
+                        xs: "12px",
+                        sm: "14px",
+                        md: "14px",
+                        lg: "14px",
+                        xl: "18px",
+                      },
+                    }}
+                  >
+                    {women.info}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#797979",
+                      fontWeight: "500",
+                      fontSize: {
+                        xs: "10px",
+                        sm: "12px",
+                        md: "12px",
+                        lg: "14px",
+                        xl: "14px",
+                      },
+                    }}
+                  >
+                    Explore Now!
+                  </Typography>
+                </div>
+                <Button>
+                  <ArrowRightAltIcon
+                    sx={{ fontSize: "32px", color: "#797979" }}
+                  />
+                </Button>
+              </Box>
             </Box>
-          </Box>
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={women_card_2} className="img" />
-            <Box className="women_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Coats & Parkas
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={women_card_3} className="img" />
-            <Box className="women_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Tees & T-Shirt
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={women_card_4} className="img" />
-            <Box className="women_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Boxers
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
-            </Box>
-          </Box>
+          ))}
         </Box>
       </Container>
     </MenStyleCss>
@@ -178,20 +118,21 @@ const MenStyleCss = styled.div`
     gap: 16px;
     justify-content: center;
   }
-  .main_women_card_page .img {
-    border-radius: 16px;
-    height: 100%;
-  }
+
   .women_card_text {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 8px;
   }
+
   .img {
     width: 100%;
     object-fit: cover;
+    height: 90%;
+    border-radius: 16px;
   }
+
   .left_zone_border {
     border: 2px solid #8a33fd;
     border-radius: 10px;

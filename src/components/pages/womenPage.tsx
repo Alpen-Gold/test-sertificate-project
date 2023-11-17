@@ -146,8 +146,8 @@ function WomenPage() {
               component="nav"
               aria-label="mailbox folders"
             >
-              {clothes.map((cloth, index) => (
-                <ListItem key={index}>
+              {clothes.map((cloth) => (
+                <ListItem>
                   <ListItemText primary={cloth} />
                   <Button>
                     <ChevronRightIcon />
@@ -157,6 +157,7 @@ function WomenPage() {
             </List>
             <Divider sx={{ borderBottomWidth: "2px" }} />
             <Accordion
+              defaultExpanded={true}
               sx={{
                 border: "0",
                 boxShadow: "none",
@@ -173,7 +174,7 @@ function WomenPage() {
               </AccordionSummary>
               <Divider sx={{ borderBottomWidth: "2px" }} />
               <AccordionDetails sx={{ padding: "0 26px" }}>
-                <Box sx={{ width: "100%", padding: "32px 0" }}>
+                <Box sx={{ width: "100%", padding: "32px 0 16px" }}>
                   <Slider
                     getAriaLabel={() => "Temperature range"}
                     value={value}
@@ -186,13 +187,19 @@ function WomenPage() {
                   >
                     <Button
                       variant="outlined"
+                      className="btn_price_control"
                       sx={{ padding: 0, borderRadius: "8px", minWidth: "80px" }}
                     >
                       $70
                     </Button>
                     <Button
                       variant="outlined"
-                      sx={{ padding: 0, borderRadius: "8px", minWidth: "80px" }}
+                      className="btn_price_control"
+                      sx={{
+                        padding: 0,
+                        borderRadius: "8px",
+                        minWidth: "80px",
+                      }}
                     >
                       $160
                     </Button>
@@ -202,6 +209,7 @@ function WomenPage() {
             </Accordion>
             <Divider sx={{ borderBottomWidth: "2px" }} />
             <Accordion
+              defaultExpanded={true}
               sx={{
                 border: "0",
                 boxShadow: "none",
@@ -227,8 +235,8 @@ function WomenPage() {
                     flexWrap: "wrap",
                   }}
                 >
-                  {colors.map((color, index) => (
-                    <Box className="main_box" key={index}>
+                  {colors.map((color) => (
+                    <Box className="main_box">
                       <Box className="in_main_box">
                         <ListItemButton
                           sx={{
@@ -248,6 +256,7 @@ function WomenPage() {
             </Accordion>
             <Divider sx={{ borderBottomWidth: "2px" }} />
             <Accordion
+              defaultExpanded={true}
               sx={{
                 border: "0",
                 boxShadow: "none",
@@ -272,12 +281,8 @@ function WomenPage() {
                       flexWrap: "wrap",
                     }}
                   >
-                    {btnSize.map((size, index) => (
-                      <Button
-                        variant="outlined"
-                        className="btn_size"
-                        key={index}
-                      >
+                    {btnSize.map((size) => (
+                      <Button variant="outlined" className="btn_size">
                         {size}
                       </Button>
                     ))}
@@ -287,6 +292,7 @@ function WomenPage() {
             </Accordion>
             <Divider sx={{ borderBottomWidth: "2px" }} />
             <Accordion
+              defaultExpanded={true}
               sx={{
                 border: "0",
                 boxShadow: "none",
@@ -308,8 +314,8 @@ function WomenPage() {
                   component="nav"
                   aria-label="mailbox folders"
                 >
-                  {dressStyle.map((dress, index) => (
-                    <ListItem key={index}>
+                  {dressStyle.map((dress) => (
+                    <ListItem>
                       <ListItemText primary={dress} />
                       <Button>
                         <ChevronRightIcon />
@@ -320,41 +326,29 @@ function WomenPage() {
               </AccordionDetails>
             </Accordion>
           </Box>
-
+          {/*  _content_  */}
           <ClothingPage />
+          {/*  _content_  */}
         </Box>
+        {/* best_price */}
         <BestPricePage />
+        {/*  best_price */}
       </Container>
+      {/* _footer_ */}
       <FooterPage />
+      {/* _footer_ */}
     </WomenStyle>
   );
 }
 
 const WomenStyle = styled.div`
-  /* Women_start_text */
-  .Women_start_text {
-    margin: 48px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .btn_price_control {
+    color: #3c4242;
+    border: 2px solid #bebcbd;
+    font-size: 16px;
+    padding: 2px 32px;
+    margin-top: 14px;
   }
-  .start {
-    color: #3f4646;
-    font-size: 22px;
-    font-weight: 600;
-  }
-  .end {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    color: #3f4646;
-    font-size: 22px;
-    font-weight: 600;
-  }
-  .end span {
-    color: #8a33fd;
-  }
-  /* Women_start_text */
 
   .btn_price {
     border-radius: 8px;

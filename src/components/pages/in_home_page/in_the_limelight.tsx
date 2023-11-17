@@ -42,6 +42,38 @@ const cards = [
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function Limelight() {
+  const btn_price_size = {
+    xs: "10px",
+    sm: "14px",
+    md: "14px",
+    lg: "14px",
+    xl: "16px",
+  };
+
+  const info_size = {
+    xs: "12px",
+    sm: "14px",
+    md: "14px",
+    lg: "14px",
+    xl: "18px",
+  };
+
+  const bottom_info = {
+    xs: "10px",
+    sm: "12px",
+    md: "12px",
+    lg: "14px",
+    xl: "14px",
+  };
+
+  const card_width = {
+    xs: "48%",
+    sm: "48%",
+    md: "32%",
+    lg: "23.5%",
+    xl: "23.5%",
+  };
+
   return (
     <LimelightStyleCss>
       <Container>
@@ -67,19 +99,7 @@ function Limelight() {
 
         <Box className="main_popular_card_page">
           {cards.map((card) => (
-            <Box
-              sx={{
-                width: {
-                  xs: "100%",
-                  sm: "48%",
-                  md: "32%",
-                  lg: "23.5%",
-                  xl: "23.5%",
-                },
-                marginBottom: "70px",
-                padding: "0 10px",
-              }}
-            >
+            <Box sx={{ width: card_width }}>
               <Box position={"relative"}>
                 <img src={card.img} className="img" />
                 <Checkbox
@@ -102,7 +122,7 @@ function Limelight() {
                     sx={{
                       color: "#2A2F2F",
                       fontWeight: "600",
-                      fontSize: "16px",
+                      fontSize: info_size,
                     }}
                   >
                     {card.info}
@@ -110,20 +130,17 @@ function Limelight() {
                   <Typography
                     sx={{
                       color: "#797979",
-                      fontSize: "14px",
                       fontWeight: "500",
+                      fontSize: bottom_info,
                     }}
                   >
                     {card.bottom_info}
                   </Typography>
                 </div>
                 <Button
+                  className="btn_price"
                   sx={{
-                    borderRadius: "8px",
-                    backgroundColor: "#F6F6F6",
-                    padding: "6px 16px",
-                    color: "#3C4242",
-                    fontWeight: "700",
+                    fontSize: btn_price_size,
                   }}
                 >
                   {card.price}
@@ -143,25 +160,34 @@ const LimelightStyleCss = styled.div`
     flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
+    margin-bottom: 68px;
   }
-  .main_popular_card_page .img {
-    border-radius: 16px;
-    height: 100%;
-  }
+
   .popular_card_text {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 8px;
   }
+
   .img {
     width: 100%;
     object-fit: cover;
+    height: 100%;
+    border-radius: 16px;
   }
   .left_zone_border {
     border: 2px solid #8a33fd;
     border-radius: 10px;
     height: 20px;
+  }
+
+  .btn_price {
+    border-radius: 8px;
+    padding: 6px 16px;
+    background-color: #f6f6f6;
+    font-weight: 700;
+    color: #3c4242;
   }
 `;
 

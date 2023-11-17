@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import LocalGroceryStoreOutlinedIcon from "@mui/icons-material/LocalGroceryStoreOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useSize } from "ahooks";
 import { useEffect } from "react";
 
@@ -144,7 +145,7 @@ function Leyout() {
                   gap: "20px",
                 }}
               >
-                {ekranSize !== undefined && ekranSize < 900 ? (
+                {ekranSize !== undefined && ekranSize < 892 ? (
                   <MenuLeyout pages={pages} />
                 ) : null}
 
@@ -170,7 +171,7 @@ function Leyout() {
                           display: "block",
                           textTransform: "capitalize",
                           fontWeight: "700",
-                          fontSize: { md: "14px", xl: "16px" },
+                          fontSize: { md: "16px", xl: "16px" },
                         }}
                       >
                         {page}
@@ -191,38 +192,18 @@ function Leyout() {
 
               <Box sx={{ flexGrow: 0 }}>
                 <Box sx={{ display: { md: "flex" } }}>
+                  <button className="btn_menu">
+                    <FavoriteBorderIcon />
+                  </button>
                   <Tooltip title="Open settings">
-                    <button
-                      onClick={handleOpenUserMenu}
-                      style={{
-                        padding: "6px 0 4px",
-                        borderRadius: "6px",
-                        minWidth: "42px",
-                        color: "#807D7E",
-                        backgroundColor: "#F6F6F6",
-                        border: "none",
-                        outline: "none",
-                        marginRight: "10px",
-                        cursor: "pointer",
-                      }}
-                    >
+                    <button onClick={handleOpenUserMenu} className="btn_menu">
                       <Person2OutlinedIcon />
                     </button>
                   </Tooltip>
                   <NavLink to="cart">
                     {({ isActive }) => (
                       <button
-                        className={isActive ? "bg_active" : ""}
-                        style={{
-                          cursor: "pointer",
-                          padding: "6px 0 4px",
-                          borderRadius: "6px",
-                          minWidth: "42px",
-                          color: "#807D7E",
-                          backgroundColor: "#F6F6F6",
-                          border: "none",
-                          outline: "none",
-                        }}
+                        className={`btn_menu ${isActive ? "bg_active" : ""}`}
                       >
                         <LocalGroceryStoreOutlinedIcon />
                       </button>
@@ -268,6 +249,17 @@ const LoyautCss = styled.div`
   .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
     padding: 8px 0;
     color: #807d7e;
+  }
+  .btn_menu {
+    margin-right: 10px;
+    cursor: pointer;
+    padding: 6px 0 4px;
+    border-radius: 6px;
+    min-width: 42px;
+    color: #807d7e;
+    background-color: #f6f6f6;
+    border: none;
+    outline: none;
   }
 `;
 

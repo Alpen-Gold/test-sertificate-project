@@ -672,6 +672,7 @@ function ZonePage() {
                 lg: "0",
                 xl: "0",
               },
+              marginTop: { xs: "32px", md: "32px", lg: "0", xl: "0" },
               overflow: "hidden",
             }}
           >

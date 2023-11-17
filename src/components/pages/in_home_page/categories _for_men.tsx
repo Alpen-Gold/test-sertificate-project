@@ -13,7 +13,50 @@ import men_card_7 from "../../../assets/img/men_card_7.png";
 import men_card_8 from "../../../assets/img/men_card_8.png";
 // img_men_page
 
+const MenData = [
+  {
+    img: men_card_1,
+    info: "Shirts",
+  },
+  {
+    img: men_card_2,
+    info: "Printed T-Shirts",
+  },
+  {
+    img: men_card_3,
+    info: "Plain T-Shirt",
+  },
+  {
+    img: men_card_4,
+    info: "Polo T-Shirt",
+  },
+  {
+    img: men_card_5,
+    info: "Hoodies & Sweetshirt",
+  },
+  {
+    img: men_card_6,
+    info: "Jeans",
+  },
+  {
+    img: men_card_7,
+    info: "Activewear",
+  },
+  {
+    img: men_card_8,
+    info: "Boxers",
+  },
+];
+
 function CardMenPage() {
+  const card_width = {
+    xs: "48%",
+    sm: "48%",
+    md: "32%",
+    lg: "23.5%",
+    xl: "23.5%",
+  };
+
   return (
     <MenStyleCss>
       <Container>
@@ -37,270 +80,52 @@ function CardMenPage() {
           </Typography>
         </Box>
         <Box className="main_men_card_page">
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={men_card_1} className="img" />
-            <Box className="men_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Shirts
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
+          {MenData.map((men) => (
+            <Box sx={{ width: card_width }}>
+              <Box>
+                <img src={men.img} className="img" />
+              </Box>
+              <Box className="men_card_text">
+                <div>
+                  <Typography
+                    sx={{
+                      color: "#2A2F2F",
+                      fontWeight: "700",
+                      fontSize: {
+                        xs: "12px",
+                        sm: "14px",
+                        md: "14px",
+                        lg: "14px",
+                        xl: "18px",
+                      },
+                    }}
+                  >
+                    {men.info}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#797979",
+                      fontWeight: "500",
+                      fontSize: {
+                        xs: "10px",
+                        sm: "12px",
+                        md: "12px",
+                        lg: "14px",
+                        xl: "14px",
+                      },
+                    }}
+                  >
+                    Explore Now!
+                  </Typography>
+                </div>
+                <Button>
+                  <ArrowRightAltIcon
+                    sx={{ fontSize: "32px", color: "#797979" }}
+                  />
+                </Button>
+              </Box>
             </Box>
-          </Box>
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={men_card_2} className="img" />
-            <Box className="men_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Printed T-Shirts
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={men_card_3} className="img" />
-            <Box className="men_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Plain T-Shirt
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={men_card_4} className="img" />
-            <Box className="men_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Polo T-Shirt
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={men_card_5} className="img" />
-            <Box className="men_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Hoodies & Sweetshirt
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={men_card_6} className="img" />
-            <Box className="men_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Jeans
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={men_card_7} className="img" />
-            <Box className="men_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Activewear
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "48%",
-                md: "32%",
-                lg: "23.5%",
-                xl: "23.5%",
-              },
-              marginBottom: "70px",
-            }}
-          >
-            <img src={men_card_8} className="img" />
-            <Box className="men_card_text">
-              <div>
-                <Typography
-                  sx={{ color: "#2A2F2F", fontWeight: "700", fontSize: "18px" }}
-                >
-                  Boxers
-                </Typography>
-                <Typography
-                  sx={{ color: "#797979", fontSize: "14px", fontWeight: "500" }}
-                >
-                  Explore Now!
-                </Typography>
-              </div>
-              <Button>
-                <ArrowRightAltIcon
-                  sx={{ fontSize: "32px", color: "#797979" }}
-                />
-              </Button>
-            </Box>
-          </Box>
+          ))}
         </Box>
       </Container>
     </MenStyleCss>
@@ -314,10 +139,6 @@ const MenStyleCss = styled.div`
     gap: 16px;
     justify-content: center;
   }
-  .main_men_card_page .img {
-    border-radius: 16px;
-    height: 100%;
-  }
   .men_card_text {
     display: flex;
     align-items: center;
@@ -327,6 +148,8 @@ const MenStyleCss = styled.div`
   .img {
     width: 100%;
     object-fit: cover;
+    height: 90%;
+    border-radius: 16px;
   }
   .left_zone_border {
     border: 2px solid #8a33fd;
