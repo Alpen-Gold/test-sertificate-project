@@ -15,6 +15,7 @@ import Login from "./components/LoginLeyout";
 import CartPage from "./components/pages/in_cart_page/cartPage";
 import CartBuyPage from "./components/pages/in_cart_page/cartBuyPage";
 import WomenPage from "./components/pages/womenPage";
+import FullInfoProduct from "./components/pages/fullInfoBrend";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="home" element={<HomePage />}></Route>
           <Route path="men" element={<ManPage />}></Route>
           <Route path="women" element={<WomenPage />}></Route>
+          <Route path="full-info-product" element={<FullInfoProduct />}></Route>
           <Route path="cart" element={<CartPage />}></Route>
           <Route path="buy-my-cart" element={<CartBuyPage />}></Route>
           <Route path="*" element={<NotAdminPage />}></Route>

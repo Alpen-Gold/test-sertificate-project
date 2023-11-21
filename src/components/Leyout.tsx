@@ -10,7 +10,7 @@ import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
+// import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
@@ -68,18 +68,18 @@ const StyledInputBase = styledm(InputBase)(({ theme }) => ({
 //seacrh
 
 //
-import useScrollTrigger from "@mui/material/useScrollTrigger";
+// import useScrollTrigger from "@mui/material/useScrollTrigger";
 
-const ElevationScroll = ({ children }) => {
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0,
-  });
+// const ElevationScroll = ({ children }) => {
+//   const trigger = useScrollTrigger({
+//     disableHysteresis: true,
+//     threshold: 0,
+//   });
 
-  return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0,
-  });
-};
+//   return React.cloneElement(children, {
+//     elevation: trigger ? 4 : 0,
+//   });
+// };
 //
 
 function Leyout() {
@@ -93,9 +93,9 @@ function Leyout() {
     setEkranSize(size?.width);
   }, [size?.width]);
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  // const handleOpenUserMenu = (event) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
 
   console.log(ekranSize, "salom");
 
@@ -121,122 +121,134 @@ function Leyout() {
 
   return (
     <LoyautCss ref={ref}>
-      <ElevationScroll>
-        <AppBar
-          position="sticky"
-          sx={{
-            backgroundColor: "#fff",
-            boxShadow: showBorder ? "0 4px 4px 0 #00000011" : "none",
-            borderBottom: showBorder ? "none" : "1px solid #BEBCBD",
-            zIndex: 100,
-          }}
-        >
-          <Container>
-            <Toolbar
+      {/* <ElevationScroll> */}
+      <AppBar
+        position="sticky"
+        sx={{
+          backgroundColor: "#fff",
+          boxShadow: showBorder ? "0 4px 4px 0 #00000011" : "none",
+          borderBottom: showBorder ? "none" : "1px solid #BEBCBD",
+          zIndex: 100,
+        }}
+      >
+        <Container>
+          <Toolbar
+            sx={{
+              justifyContent: "space-between",
+            }}
+            disableGutters
+          >
+            <Box
               sx={{
-                justifyContent: "space-between",
+                display: "flex",
+                alignItems: "center",
+                gap: "20px",
               }}
-              disableGutters
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "20px",
-                }}
-              >
-                {ekranSize !== undefined && ekranSize < 892 ? (
-                  <MenuLeyout pages={pages} />
-                ) : null}
+              {ekranSize !== undefined && ekranSize < 892 ? (
+                <MenuLeyout pages={pages} />
+              ) : null}
 
-                <img src={logo} alt="none" />
-              </Box>
+              <img src={logo} alt="none" />
+            </Box>
 
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "none", md: "flex" },
-                  ml: { xs: 0, md: 2, xl: 5 },
-                }}
-              >
-                {pages.map((page: string, index: number) => (
-                  <NavLink to={page.toLowerCase()} key={index}>
-                    {({ isActive }) => (
-                      <Button
-                        className={isActive ? "active_menu_btn " : ""}
-                        sx={{
-                          my: 2,
-                          px: 1,
-                          color: "#807d7e",
-                          display: "block",
-                          textTransform: "capitalize",
-                          fontWeight: "700",
-                          fontSize: { md: "16px", xl: "16px" },
-                        }}
-                      >
-                        {page}
-                      </Button>
-                    )}
-                  </NavLink>
-                ))}
-              </Box>
-              <Search sx={{ mr: 4, display: { xs: "none", md: "block" } }}>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Search…"
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </Search>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                ml: { xs: 0, md: 2, xl: 5 },
+              }}
+            >
+              {pages.map((page: string, index: number) => (
+                <NavLink to={page.toLowerCase()} key={index}>
+                  {({ isActive }) => (
+                    <Button
+                      className={isActive ? "active_menu_btn " : ""}
+                      sx={{
+                        my: 2,
+                        px: 1,
+                        color: "#807d7e",
+                        display: "block",
+                        textTransform: "capitalize",
+                        fontWeight: "700",
+                        fontSize: { md: "16px", xl: "16px" },
+                      }}
+                    >
+                      {page}
+                    </Button>
+                  )}
+                </NavLink>
+              ))}
+            </Box>
+            <Search sx={{ mr: 4, display: { xs: "none", md: "block" } }}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
 
-              <Box sx={{ flexGrow: 0 }}>
-                <Box sx={{ display: { md: "flex" } }}>
-                  <button className="btn_menu">
-                    <FavoriteBorderIcon />
-                  </button>
-                  <Tooltip title="Open settings">
-                    <button onClick={handleOpenUserMenu} className="btn_menu">
+            <Box sx={{ flexGrow: 0 }}>
+              <Box sx={{ display: { md: "flex" } }}>
+                <NavLink to="like">
+                  {({ isActive }) => (
+                    <button
+                      className={`btn_menu ${isActive ? "bg_active" : ""}`}
+                    >
+                      <FavoriteBorderIcon />
+                    </button>
+                  )}
+                </NavLink>
+
+                <NavLink to="profile">
+                  {({ isActive }) => (
+                    <button
+                      className={`btn_menu ${isActive ? "bg_active" : ""}`}
+                    >
                       <Person2OutlinedIcon />
                     </button>
-                  </Tooltip>
-                  <NavLink to="cart">
-                    {({ isActive }) => (
-                      <button
-                        className={`btn_menu ${isActive ? "bg_active" : ""}`}
-                      >
-                        <LocalGroceryStoreOutlinedIcon />
-                      </button>
-                    )}
-                  </NavLink>
-                </Box>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
+                  )}
+                </NavLink>
+
+                <NavLink to="cart">
+                  {({ isActive }) => (
+                    <button
+                      className={`btn_menu ${isActive ? "bg_active" : ""}`}
+                    >
+                      <LocalGroceryStoreOutlinedIcon />
+                    </button>
+                  )}
+                </NavLink>
               </Box>
-            </Toolbar>
-          </Container>
-        </AppBar>
-      </ElevationScroll>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      {/* </ElevationScroll> */}
 
       <div>
         <Outlet />

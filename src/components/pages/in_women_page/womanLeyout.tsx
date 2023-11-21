@@ -106,6 +106,7 @@ function WomanLeyout() {
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
+    console.log(event);
   };
 
   return (

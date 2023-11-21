@@ -4,8 +4,7 @@
 // import axios from "axios";
 
 import { Box, TextField } from "@mui/material";
-import { useState } from "react";
-import { NavLink, useLocation, useNavigate, useRoutes } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function SignUn() {
   //   const [registerEmail, setRegisterEmail] = useState("");
@@ -87,7 +86,7 @@ function SignUn() {
                 type="email"
                 variant="outlined"
                 placeholder="Enter your email..."
-                onChange={(e) => setRegisterEmail(e.target.value)}
+                // onChange={(e) => setRegisterEmail(e.target.value)}
                 helperText="Enter email !"
               />
             </div>
@@ -99,7 +98,7 @@ function SignUn() {
                 type="password"
                 variant="outlined"
                 placeholder="Enter your password..."
-                onChange={(e) => setRegisterPassword(e.target.value)}
+                // onChange={(e) => setRegisterPassword(e.target.value)}
               />
             </div>
 
@@ -109,7 +108,7 @@ function SignUn() {
                 id="password Pre"
                 type="password"
                 variant="outlined"
-                onChange={(e) => setRegisterPasswordPrev(e.target.value)}
+                // onChange={(e) => setRegisterPasswordPrev(e.target.value)}
                 placeholder="Enter your password pre..."
               />
             </div>

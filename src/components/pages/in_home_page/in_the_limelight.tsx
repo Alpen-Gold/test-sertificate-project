@@ -1,4 +1,4 @@
-import { Box, Button, Typography, Container, IconButton } from "@mui/material";
+import { Box, Button, Typography, Container } from "@mui/material";
 import styled from "styled-components";
 
 import Checkbox from "@mui/material/Checkbox";

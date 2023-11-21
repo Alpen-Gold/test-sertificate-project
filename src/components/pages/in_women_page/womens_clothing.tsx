@@ -20,6 +20,7 @@ import popular_12 from "../../../assets/img/popular_12.png";
 ////
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
+import { NavLink } from "react-router-dom";
 ////
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -148,6 +149,7 @@ function ClothingPage() {
             <span>New</span> Recommended
           </Typography>
         </Box>
+
         <Box className="main_popular_card_page">
           {cards.map((card) => (
             <Box
@@ -163,22 +165,24 @@ function ClothingPage() {
                 padding: "0 4px",
               }}
             >
-              <Box position={"relative"}>
-                <img src={card.img} className="img" />
-                <Checkbox
-                  {...label}
-                  icon={<FavoriteBorder sx={{ color: "red" }} />}
-                  checkedIcon={<Favorite sx={{ color: "red" }} />}
-                  sx={{
-                    position: "absolute",
-                    top: "6%",
-                    fontSize: "1px",
-                    right: "5%",
-                    padding: "6px",
-                    backgroundColor: "#fff",
-                  }}
-                />
-              </Box>
+              <NavLink to={"/full-info-product"}>
+                <Box position={"relative"}>
+                  <img src={card.img} className="img" />
+                  <Checkbox
+                    {...label}
+                    icon={<FavoriteBorder sx={{ color: "red" }} />}
+                    checkedIcon={<Favorite sx={{ color: "red" }} />}
+                    sx={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "1px",
+                      right: "5%",
+                      padding: "6px",
+                      backgroundColor: "#fff",
+                    }}
+                  />
+                </Box>
+              </NavLink>
               <Box className="popular_card_text">
                 <div>
                   <Typography

@@ -42,9 +42,9 @@ export default function MenuLayout({ pages }: MenuType) {
       setState({ ...state, [anchor]: open });
     };
 
-  const handleItemClick = (index: number) => {
-    setState({ ...state, activeItem: index, left: false });
-  };
+  // const handleItemClick = (index: number) => {
+  //   setState({ ...state, activeItem: index, left: false });
+  // };
 
   const list = (anchor: "left") => (
     // <MenuStyle>
@@ -65,7 +65,7 @@ export default function MenuLayout({ pages }: MenuType) {
               key={text}
               disablePadding
               className={state.activeItem === index ? "active_menu_btn" : ""}
-              onClick={() => handleItemClick(index)}
+              // onClick={() => handleItemClick(index)}
               style={{
                 color:
                   state.activeItem === index ? "#000 !important" : "#807D7E",

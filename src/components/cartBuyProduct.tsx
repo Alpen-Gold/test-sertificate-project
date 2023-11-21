@@ -1,11 +1,11 @@
-import { Box, Container, Typography, Button } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
+// import { NavLink } from "react-router-dom";
 import dresImg from "../assets/img/Rectangle 734.png";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+// import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import FooterPage from "./Footer";
+// import FooterPage from "./Footer";
 
 function CartCard() {
   return (

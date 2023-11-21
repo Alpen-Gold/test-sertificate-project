@@ -1,16 +1,18 @@
-import styled from "@emotion/styled";
-import logoImg from "../../assets/img";
-import signUpImg from "../../assets/img/and-machines-vqTWfa4DjEk-unsplash 1.png";
-import axios from "axios";
+// import styled from "@emotion/styled";
+// import logoImg from "../../assets/img";
+// import signUpImg from "../../assets/img/and-machines-vqTWfa4DjEk-unsplash 1.png";
+// import axios from "axios";
 
 import { Box, TextField } from "@mui/material";
 import { useState } from "react";
-import { NavLink, useLocation, useNavigate, useRoutes } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function SignIn() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  const [registerPasswordPrev, setRegisterPasswordPrev] = useState("");
+  console.log(registerEmail, registerPassword);
+
+  // const [registerPasswordPrev, setRegisterPasswordPrev] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();

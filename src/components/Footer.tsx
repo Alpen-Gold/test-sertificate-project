@@ -1,11 +1,4 @@
-import {
-  Box,
-  Typography,
-  Container,
-  Button,
-  IconButton,
-  Stack,
-} from "@mui/material";
+import { Box, Typography, Container, IconButton, Stack } from "@mui/material";
 
 import styled from "styled-components";
 import FacebookIcon from "@mui/icons-material/Facebook";

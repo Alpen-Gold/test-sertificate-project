@@ -1,44 +1,38 @@
 import styled from "@emotion/styled";
 import logoImg from "../assets/img/Logo.png";
-import signUpImg from "../assets/img/and-machines-vqTWfa4DjEk-unsplash 1.png";
-import axios from "axios";
+// import signUpImg from "../assets/img/and-machines-vqTWfa4DjEk-unsplash 1.png";
+// import axios from "axios";
 
-import { Box, Container, TextField } from "@mui/material";
-import { useState } from "react";
-import {
-  NavLink,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useRoutes,
-} from "react-router-dom";
+import { Container } from "@mui/material";
+// import { useState } from "react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 
 function Login() {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [registerPasswordPrev, setRegisterPasswordPrev] = useState("");
+  // const [registerEmail, setRegisterEmail] = useState("");
+  // const [registerPassword, setRegisterPassword] = useState("");
+  // const [registerPasswordPrev, setRegisterPasswordPrev] = useState("");
 
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   console.log("Path:", location.pathname);
-  const ucerR = async () => {
-    navigate("/home");
+  // const ucerR = async () => {
+  // navigate("/home");
 
-    // try {
-    //   const respons = await axios.post(
-    //     "http://192.168.1.48:8080/api/auth/register",
-    //     {
-    //       email: registerEmail,
-    //       password: registerPassword,
-    //       prePassword: registerPasswordPrev,
-    //     }
-    //   );
-    //   console.log(respons);
-    // } catch (error) {
-    //   alert(error);
-    // }
-  };
+  // try {
+  //   const respons = await axios.post(
+  //     "http://192.168.1.48:8080/api/auth/register",
+  //     {
+  //       email: registerEmail,
+  //       password: registerPassword,
+  //       prePassword: registerPasswordPrev,
+  //     }
+  //   );
+  //   console.log(respons);
+  // } catch (error) {
+  //   alert(error);
+  // }
+  // };
 
   return (
     <AllStyleLogin>

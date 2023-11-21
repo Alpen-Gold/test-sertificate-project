@@ -2,8 +2,11 @@ import {
   Box,
   Checkbox,
   Container,
+  FormControl,
   FormControlLabel,
   FormGroup,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
 } from "@mui/material";
@@ -22,14 +25,16 @@ function CartBuyPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
 
+  setSelectedOption("test");
+
   const handleToggleClick = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleItemClick = (item) => {
-    setIsOpen(false);
-    setSelectedOption(item);
-  };
+  // const handleItemClick = (item) => {
+  //   setIsOpen(false);
+  //   setSelectedOption(item);
+  // };
 
   return (
     <CartBuyWrapper>
@@ -88,6 +93,7 @@ function CartBuyPage() {
         </Typography>
 
         <Box
+          className="cart_dad_box"
           sx={{
             display: "flex",
             alignItems: "start",
@@ -271,19 +277,19 @@ function CartBuyPage() {
                   <ul className={`drop-items ${isOpen ? "active" : ""}`}>
                     <li
                       className="item"
-                      onClick={() => handleItemClick("option first")}
+                      // onClick={() => handleItemClick("option first")}
                     >
                       option first
                     </li>
                     <li
                       className="item"
-                      onClick={() => handleItemClick("option second")}
+                      // onClick={() => handleItemClick("option second")}
                     >
                       option second
                     </li>
                     <li
                       className="item"
-                      onClick={() => handleItemClick("option third")}
+                      // onClick={() => handleItemClick("option third")}
                     >
                       option third
                     </li>
@@ -364,7 +370,7 @@ function CartBuyPage() {
                     mb: "10px",
                   }}
                 >
-                  Arrives by Monday, June 7
+                  Payment Method
                 </Typography>
 
                 <hr />
@@ -428,31 +434,160 @@ function CartBuyPage() {
             <Box
               sx={{
                 mt: "20px",
-                bgcolor: "red",
+                bgcolor: "#F6F6F6",
                 padding: "20px",
                 borderRadius: "14px",
               }}
             >
-              <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                <img
-                  src={fotoGoogle}
-                  alt="none"
-                  style={{ cursor: "pointer" }}
-                />
+              <Box>
+                <FormControl sx={{ width: "100%" }}>
+                  <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="female"
+                    name="radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio />}
+                      label={
+                        <>
+                          <Typography sx={{ fontWeight: 700, fontSize: 20 }}>
+                            Credit Card
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: 14,
+                              color: "#3C4242",
+                              fontWeight: 400,
+                            }}
+                          >
+                            We accept all major credit cards.
+                          </Typography>
+                        </>
+                      }
+                    />
 
-                <img src={fotoVisa} alt="none" style={{ cursor: "pointer" }} />
+                    <Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          gap: "10px",
+                          m: "10px 0",
+                          alignItems: "center",
+                        }}
+                      >
+                        <img
+                          src={fotoGoogle}
+                          alt="none"
+                          style={{ cursor: "pointer" }}
+                        />
 
-                <img
-                  src={fotoPaypal}
-                  alt="none"
-                  style={{ cursor: "pointer" }}
-                />
+                        <img
+                          src={fotoVisa}
+                          alt="none"
+                          style={{ cursor: "pointer" }}
+                        />
 
-                <img
-                  src={fotoPayPas}
-                  alt="none"
-                  style={{ cursor: "pointer" }}
-                />
+                        <img
+                          src={fotoPaypal}
+                          alt="none"
+                          style={{ cursor: "pointer" }}
+                        />
+
+                        <img
+                          src={fotoPayPas}
+                          alt="none"
+                          style={{ cursor: "pointer" }}
+                        />
+                      </Box>
+
+                      <Box sx={{ minWidth: "100%", mb: "30px" }}>
+                        <Box
+                          sx={{
+                            m: "20px 0",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "20px",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <TextField
+                            sx={{ flex: 1 }}
+                            type="text"
+                            id="countryRegion"
+                            variant="outlined"
+                            placeholder="Card number"
+                          />
+
+                          <TextField
+                            sx={{ flex: 1 }}
+                            type="text"
+                            id="countryRegion"
+                            variant="outlined"
+                            placeholder="Name of card"
+                          />
+                        </Box>
+
+                        <Box
+                          sx={{
+                            m: "20px 0",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "20px",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <TextField
+                            sx={{ flex: 1 }}
+                            type="text"
+                            id="countryRegion"
+                            variant="outlined"
+                            placeholder="Expiration date (MM/YY)"
+                          />
+
+                          <TextField
+                            sx={{ flex: 1 }}
+                            type="password"
+                            id="countryRegion"
+                            variant="outlined"
+                            placeholder="Security Code"
+                          />
+                        </Box>
+                      </Box>
+
+                      <hr />
+                    </Box>
+
+                    <FormControlLabel
+                      sx={{ m: "20px 0" }}
+                      value="male"
+                      control={<Radio />}
+                      label={
+                        <>
+                          <Typography sx={{ fontWeight: 700, fontSize: 20 }}>
+                            Cash on delivery
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: 14,
+                              color: "#3C4242",
+                              fontWeight: 400,
+                            }}
+                          >
+                            Pay with cash upon delivery.
+                          </Typography>
+                        </>
+                      }
+                    />
+                  </RadioGroup>
+
+                  <button
+                    className="all-button-active"
+                    style={{ marginTop: "30px" }}
+                  >
+                    Pay Now
+                  </button>
+                </FormControl>
               </Box>
             </Box>
           </Box>
@@ -776,6 +911,25 @@ const CartBuyWrapper = styled.div`
     opacity: 1;
     top: 100%;
     transition: all 0.4s ease-in-out;
+  }
+
+  @media screen and (max-width: 1100px) {
+    .cart_dad_box {
+      background-color: red;
+      align-items: center !important;
+      flex-direction: column-reverse !important;
+    }
+  }
+
+  @media screen and (max-width: 890px) {
+    .cart_dad_box {
+      background-color: blue;
+      align-items: center !important;
+      flex-direction: column-reverse !important;
+    }
+    .css-1lssgx .MuiOutlinedInput-input {
+      width: 100px !important;
+    }
   }
 `;
 
