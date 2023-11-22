@@ -59,8 +59,8 @@ function CardWomenPage() {
           </Typography>
         </Box>
         <Box className="main_women_card_page">
-          {WomenData.map((women) => (
-            <Box sx={{ width: card_width }}>
+          {WomenData.map((women, index) => (
+            <Box sx={{ width: card_width }} key={index}>
               <Box>
                 <img src={women.img} className="img" />
               </Box>

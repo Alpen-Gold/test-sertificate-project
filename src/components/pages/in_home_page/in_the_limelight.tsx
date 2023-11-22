@@ -98,8 +98,8 @@ function Limelight() {
         </Box>
 
         <Box className="main_popular_card_page">
-          {cards.map((card) => (
-            <Box sx={{ width: card_width }}>
+          {cards.map((card, index) => (
+            <Box sx={{ width: card_width }} key={index}>
               <Box position={"relative"}>
                 <img src={card.img} className="img" />
                 <Checkbox

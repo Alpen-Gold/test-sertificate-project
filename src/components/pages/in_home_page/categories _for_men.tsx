@@ -80,8 +80,8 @@ function CardMenPage() {
           </Typography>
         </Box>
         <Box className="main_men_card_page">
-          {MenData.map((men) => (
-            <Box sx={{ width: card_width }}>
+          {MenData.map((men, index) => (
+            <Box sx={{ width: card_width }} key={index}>
               <Box>
                 <img src={men.img} className="img" />
               </Box>

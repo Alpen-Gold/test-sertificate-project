@@ -140,8 +140,8 @@ function WomanLeyout() {
           component="nav"
           aria-label="mailbox folders"
         >
-          {clothes.map((cloth) => (
-            <ListItem>
+          {clothes.map((cloth, index) => (
+            <ListItem key={index}>
               <ListItemText primary={cloth} />
               <Button>
                 <ChevronRightIcon />
@@ -227,8 +227,8 @@ function WomanLeyout() {
                 flexWrap: "wrap",
               }}
             >
-              {colors.map((color) => (
-                <Box className="main_box">
+              {colors.map((color, index) => (
+                <Box className="main_box" key={index}>
                   <Box className="in_main_box">
                     <ListItemButton
                       sx={{
@@ -273,8 +273,8 @@ function WomanLeyout() {
                   flexWrap: "wrap",
                 }}
               >
-                {btnSize.map((size) => (
-                  <Button variant="outlined" className="btn_size">
+                {btnSize.map((size, index) => (
+                  <Button variant="outlined" className="btn_size" key={index}>
                     {size}
                   </Button>
                 ))}
@@ -306,8 +306,8 @@ function WomanLeyout() {
               component="nav"
               aria-label="mailbox folders"
             >
-              {dressStyle.map((dress) => (
-                <ListItem>
+              {dressStyle.map((dress, index) => (
+                <ListItem key={index}>
                   <ListItemText primary={dress} />
                   <Button>
                     <ChevronRightIcon />

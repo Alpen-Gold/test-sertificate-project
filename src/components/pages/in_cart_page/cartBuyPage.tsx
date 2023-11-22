@@ -23,9 +23,9 @@ import fotoPayPas from "../../../assets/img/Frame 443.png";
 
 function CartBuyPage() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
+  // const [selectedOption, setSelectedOption] = useState("");
 
-  setSelectedOption("test");
+  // setSelectedOption("test");
 
   const handleToggleClick = () => {
     setIsOpen(!isOpen);
@@ -271,7 +271,7 @@ function CartBuyPage() {
                   <div className="btn-toggle" onClick={handleToggleClick}>
                     <input
                       type="button"
-                      value={selectedOption || "Let's drop"}
+                      // value={selectedOption || "Let's drop"}
                     />
                   </div>
                   <ul className={`drop-items ${isOpen ? "active" : ""}`}>
@@ -895,9 +895,7 @@ const CartBuyWrapper = styled.div`
     background: #ffffff;
     transition: all 0.25s ease-in-out;
   }
-  .custom-select .drop-items li:first-child {
-    border-top: none;
-  }
+
   .custom-select .drop-items li:last-child {
     border-radius: 0 0 10px 10px;
   }

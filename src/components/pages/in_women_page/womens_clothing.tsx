@@ -151,8 +151,9 @@ function ClothingPage() {
         </Box>
 
         <Box className="main_popular_card_page">
-          {cards.map((card) => (
+          {cards.map((card, index) => (
             <Box
+              key={index}
               sx={{
                 width: {
                   xs: "48%",
