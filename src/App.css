@@ -84,3 +84,9 @@ a {
 .MuiContainer-root {
   max-width: 1400px !important;
 }
+
+.fixed_filter {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

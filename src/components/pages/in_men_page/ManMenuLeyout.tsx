@@ -1,65 +1,59 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import MenuIcon from "@mui/icons-material/Menu";
 import MenLeyout from "./menLeyout";
-// import logo from "../../../assets/img/Logo.pn";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Box,
+} from "@mui/material";
+import logo from "../../../assets/img/Logo.png";
+import TuneIcon from "@mui/icons-material/Tune";
 
 export default function ManMenuLeyout() {
-  const [state, setState] = React.useState({
-    left: false,
-    activeItem: null,
-  });
+  const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer =
-    (anchor: "left", open: boolean) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
-      ) {
-        return;
-      }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-      setState({ ...state, [anchor]: open });
-    };
-
-  const list = (anchor: "left") => (
-    <>
-      <Box
-        sx={{ width: 300 }}
-        role="presentation"
-        onClick={toggleDrawer(anchor, false)}
-        onKeyDown={toggleDrawer(anchor, false)}
-      >
-        <List>
-          <div style={{ textAlign: "center" }}>
-            {/* <img src={logo} alt="" /> */}
-          </div>
-
-          <MenLeyout />
-        </List>
-      </Box>
-    </>
-  );
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
-      <React.Fragment key={"left"}>
-        <Button onClick={toggleDrawer("left", true)}>
-          <MenuIcon />
-        </Button>
-        <Drawer
-          anchor={"left"}
-          open={state["left"]}
-          onClose={toggleDrawer("left", true)}
-        >
-          {list("left")}
-        </Drawer>
-      </React.Fragment>
+      <button onClick={handleClickOpen} className="fixed_filter">
+        <TuneIcon sx={{ transform: "rotate(90deg)" }} />
+      </button>
+
+      <Dialog
+        open={open}
+        sx={{ transition: "1s" }}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img src={logo} alt="None" />
+          </Box>
+        </DialogTitle>
+        <DialogContent>
+          <MenLeyout />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>Agree</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

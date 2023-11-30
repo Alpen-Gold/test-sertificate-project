@@ -25,10 +25,26 @@ function WomenPage() {
     <WomenStyle ref={ref}>
       <Container>
         <Box sx={{ display: "flex" }}>
-          {/* Woman Leyout  */}
+          {/* Woman Leyout */}
 
           {ekranSize !== undefined && ekranSize < 1200 ? (
-            <WomanMenuLeyout />
+            <Box
+              sx={{
+                position: "fixed",
+                zIndex: "99",
+                bottom: "5%",
+                right: "5%",
+                backgroundColor: "#F0F0F0",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "60px",
+                height: "60px",
+              }}
+            >
+              <WomanMenuLeyout />
+            </Box>
           ) : (
             <WomanLeyout />
           )}
