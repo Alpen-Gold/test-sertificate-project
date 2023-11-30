@@ -1,6 +1,6 @@
 // import styled from "@emotion/styled";
 // import logoImg from "../../assets/img";
-// import signUpImg from "../../assets/img/and-machines-vqTWfa4DjEk-unsplash 1.png";
+import signUpImg from "../../assets/img/and-machines-vqTWfa4DjEk-unsplash 1.png";
 // import axios from "axios";
 
 import { Box, TextField } from "@mui/material";
@@ -44,16 +44,10 @@ function SignIn() {
     >
       <Box sx={{ display: { xs: "none", md: "block" } }} className="wrapperImg">
         <img
-          src="https://avatars.mds.yandex.net/i?id=28bcdf401eb50ba36d475b7630783fb750ee45ac-9290726-images-thumbs&n=13"
+          src={signUpImg}
           alt="none"
           style={{ minWidth: "100%", maxHeight: "100%", objectFit: "cover" }}
         />
-
-        {/* <img
-            src={signUpImg}
-            alt="none"
-            style={{ minWidth: "100%", maxHeight: "100%", objectFit: "cover" }}
-          /> */}
       </Box>
 
       <Box

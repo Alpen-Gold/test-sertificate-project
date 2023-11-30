@@ -52,7 +52,7 @@ function Login() {
                       : "all-button"
                   }
                 >
-                  Sign In
+                  Login
                 </button>
               </NavLink>
 
