@@ -61,20 +61,21 @@ export default function MenuLayout({ pages }: MenuType) {
 
         {pages.map((text: string, index: number) => (
           <NavLink to={text.toLowerCase()} key={index}>
-            <ListItem
-              key={text}
-              disablePadding
-              className={state.activeItem === index ? "active_menu_btn" : ""}
-              // onClick={() => handleItemClick(index)}
-              style={{
-                color:
-                  state.activeItem === index ? "#000 !important" : "#807D7E",
-              }}
-            >
-              <ListItemButton>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
+            {({ isActive }) => (
+              <ListItem
+                key={text}
+                disablePadding
+                className={isActive ? "active_menu_btn " : ""}
+                style={{
+                  color:
+                    state.activeItem === index ? "blue !important" : "#807D7E",
+                }}
+              >
+                <ListItemButton>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            )}
           </NavLink>
         ))}
       </List>
