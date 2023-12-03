@@ -23,7 +23,7 @@ import fotoPayPas from "../../../assets/img/Frame 443.png";
 
 function CartBuyPage() {
   const [isOpen, setIsOpen] = useState(false);
-  // const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
 
   // setSelectedOption("test");
 
@@ -31,10 +31,10 @@ function CartBuyPage() {
     setIsOpen(!isOpen);
   };
 
-  // const handleItemClick = (item) => {
-  //   setIsOpen(false);
-  //   setSelectedOption(item);
-  // };
+  const handleItemClick = (item: string) => {
+    setIsOpen(false);
+    setSelectedOption(item);
+  };
 
   return (
     <CartBuyWrapper>
@@ -271,25 +271,25 @@ function CartBuyPage() {
                   <div className="btn-toggle" onClick={handleToggleClick}>
                     <input
                       type="button"
-                      // value={selectedOption || "Let's drop"}
+                      value={selectedOption || "Let's drop"}
                     />
                   </div>
                   <ul className={`drop-items ${isOpen ? "active" : ""}`}>
                     <li
                       className="item"
-                      // onClick={() => handleItemClick("option first")}
+                      onClick={() => handleItemClick("option first")}
                     >
                       option first
                     </li>
                     <li
                       className="item"
-                      // onClick={() => handleItemClick("option second")}
+                      onClick={() => handleItemClick("option second")}
                     >
                       option second
                     </li>
                     <li
                       className="item"
-                      // onClick={() => handleItemClick("option third")}
+                      onClick={() => handleItemClick("option third")}
                     >
                       option third
                     </li>
