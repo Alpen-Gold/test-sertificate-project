@@ -458,7 +458,7 @@ function ProductPage() {
             </div>
           </DialogContent>
           <DialogActions sx={{ bgcolor: "#101827" }}>
-            <Button onClick={handleClose} sx={{ color: "white" }}>
+            <Button onClick={() => setOpen(false)} sx={{ color: "white" }}>
               Cancel
             </Button>
             <Button onClick={addNewProductBtn} sx={{ color: "white" }}>
