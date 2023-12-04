@@ -198,7 +198,7 @@ a {
   background-position: center;
   height: 100px;
   margin: 15px 0;
-  min-width: 550px !important;
+  width: 100%;
   border: 1px dashed white;
   position: relative;
   border-radius: 15px;
