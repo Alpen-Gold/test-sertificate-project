@@ -87,6 +87,8 @@ function ProductPage() {
     } catch (error) {
       alert(error);
     }
+
+    setOpen(false);
   };
 
   const handleToggleClick = () => {

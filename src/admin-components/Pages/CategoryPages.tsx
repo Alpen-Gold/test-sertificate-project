@@ -8,44 +8,22 @@ import ProductCard from "../ProductCard";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  FormControl,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
   TextField,
 } from "@mui/material";
 
 function CategoryPage() {
   const [activeLineCube, setActiveLineCube] = useState(true);
-  const [age, setAge] = useState("White");
   const [open, setOpen] = useState(false);
-  const colors = [
-    "Red",
-    "Black",
-    "Blue",
-    "Orange",
-    "Yellow",
-    "Green",
-    "Purple",
-    "Pink",
-    "Brown",
-    "Gray",
-    "Silver",
-    "Gold",
-    "Cyan",
-    "Magenta",
-    "Indigo",
-    "Turquoise",
-    "Lime",
-    "Maroon",
-    "Teal",
-    "Olive",
-  ];
+  const [itemForm, setItemForm] = useState({
+    name: "",
+    image: "",
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -55,10 +33,8 @@ function CategoryPage() {
     setOpen(false);
   };
 
-  const handleChange = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
-
-    setAge(event.target.value);
+  const addNewCategory = () => {
+    console.log(itemForm);
   };
 
   return (
@@ -184,9 +160,15 @@ function CategoryPage() {
               autoFocus
               margin="dense"
               id="name"
-              placeholder="Product Name..."
+              placeholder="Cateogry Name..."
               type="email"
               fullWidth
+              onChange={(e) =>
+                setItemForm((old) => ({
+                  ...old,
+                  name: e.target.value,
+                }))
+              }
               variant="standard"
               sx={{
                 borderBottom: "2px solid white",
@@ -197,78 +179,44 @@ function CategoryPage() {
               }}
             />
 
-            <FormControl
-              variant="standard"
-              fullWidth
-              sx={{
-                m: "15px 0",
-                borderBottom: "2px solid white",
-                color: "white !important",
-                "& .css-1x51dt5-MuiInputBase-input-MuiInput-input": {
-                  color: "white !important",
-                },
-              }}
-            >
-              <Select
-                labelId="demo-simple-select-standard-label"
-                id="demo-simple-select-standard"
-                value={age || "white"}
-                onChange={handleChange}
-                displayEmpty
-                sx={{
-                  color: "white",
-                  "& .css-1x51dt5-MuiInputBase-input-MuiInput-input": {
-                    color: "white !important",
-                  },
-                }}
-              >
-                {colors.map((color) => (
-                  <MenuItem key={color} value={color}>
-                    {color}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <div id="profile-upload">
+              <Box className="hvr-profile-img">
+                <input
+                  id="imag"
+                  type="file"
+                  name="logo"
+                  onChange={(e) => {
+                    const file = e?.target?.files ? e?.target?.files[0] : null;
+                    if (file) {
+                      const reader = new FileReader();
 
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              placeholder="Product Name..."
-              type="email"
-              fullWidth
-              sx={{
-                borderBottom: "2px solid white",
-                color: "white",
-                "& .css-1x51dt5-MuiInputBase-input-MuiInput-input": {
-                  color: "white",
-                },
-              }}
-              variant="standard"
-            />
-
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              placeholder="Product Name..."
-              type="email"
-              fullWidth
-              sx={{
-                borderBottom: "2px solid white",
-                color: "white",
-                "& .css-1x51dt5-MuiInputBase-input-MuiInput-input": {
-                  color: "white",
-                },
-              }}
-              variant="standard"
-            />
+                      reader.onloadend = () => {
+                        setItemForm((old) => ({
+                          ...old,
+                          image: String(reader.result),
+                        }));
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                  className="upload w180"
+                  title="Dimensions 180 X 180"
+                />
+                {itemForm.image && (
+                  <img
+                    src={String(itemForm?.image)}
+                    alt="Selected"
+                    className="imgformproduct"
+                  />
+                )}
+              </Box>
+            </div>
           </DialogContent>
           <DialogActions sx={{ bgcolor: "#101827" }}>
             <Button onClick={handleClose} sx={{ color: "white" }}>
               Cancel
             </Button>
-            <Button onClick={handleClose} sx={{ color: "white" }}>
+            <Button onClick={addNewCategory} sx={{ color: "white" }}>
               Subscribe
             </Button>
           </DialogActions>
