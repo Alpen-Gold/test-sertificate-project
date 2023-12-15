@@ -16,6 +16,7 @@ import CartPage from "./components/pages/in_cart_page/cartPage";
 import CartBuyPage from "./components/pages/in_cart_page/cartBuyPage";
 import WomenPage from "./components/pages/womenPage";
 import FullInfoProduct from "./components/pages/fullInfoBrend";
+import UsersPage from "./admin-components/Pages/UserPage";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route index element={<ProductPage />}></Route>
           <Route path="product" element={<ProductPage />}></Route>
           <Route path="category" element={<CategoryPage />}></Route>
+          <Route path="users" element={<UsersPage />}></Route>
           <Route path="*" element={<NotAdminPage />}></Route>
         </Route>
         <Route path="*" element={<NotAdminPage />}></Route>
