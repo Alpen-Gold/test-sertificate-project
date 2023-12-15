@@ -11,6 +11,12 @@ import men_card_5 from "../../../assets/img/men_card_5.png";
 import men_card_6 from "../../../assets/img/men_card_6.png";
 import men_card_7 from "../../../assets/img/men_card_7.png";
 import men_card_8 from "../../../assets/img/men_card_8.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
+import { startLoading } from "../../../store/slices/apiSlice";
+import Loading from "../../animatin-elements/Loding";
 // img_men_page
 
 const MenData = [
@@ -48,14 +54,46 @@ const MenData = [
   },
 ];
 
+const card_width = {
+  xs: "48%",
+  sm: "48%",
+  md: "32%",
+  lg: "23.5%",
+  xl: "23.5%",
+};
+
 function CardMenPage() {
-  const card_width = {
-    xs: "48%",
-    sm: "48%",
-    md: "32%",
-    lg: "23.5%",
-    xl: "23.5%",
-  };
+  const [dataProducts, setDataProduct] = useState([]);
+  const dispatch = useDispatch();
+  const loading = useSelector(
+    (state: RootState) => state.apiSliceProducts.loading
+  );
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      dispatch(startLoading(true));
+
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/shop/products",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("userShopToken")}`,
+            },
+          }
+        );
+
+        setDataProduct(response.data);
+
+        console.log(response);
+      } catch (error) {
+        alert(error);
+      } finally {
+        dispatch(startLoading(false));
+      }
+    };
+    fetchProduct();
+  }, []);
 
   return (
     <MenStyleCss>
@@ -80,52 +118,57 @@ function CardMenPage() {
           </Typography>
         </Box>
         <Box className="main_men_card_page">
-          {MenData.map((men, index) => (
-            <Box sx={{ width: card_width }} key={index}>
-              <Box>
-                <img src={men.img} className="img" />
+          {loading ? (
+            <Loading />
+          ) : (
+            dataProducts.map((men, index) => (
+              <Box sx={{ width: card_width }} key={index}>
+                {console.log(men)}
+                <Box>
+                  <img src={men.image} className="img" />
+                </Box>
+                <Box className="men_card_text">
+                  <div>
+                    <Typography
+                      sx={{
+                        color: "#2A2F2F",
+                        fontWeight: "700",
+                        fontSize: {
+                          xs: "12px",
+                          sm: "14px",
+                          md: "14px",
+                          lg: "14px",
+                          xl: "18px",
+                        },
+                      }}
+                    >
+                      {men.name}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: "#797979",
+                        fontWeight: "500",
+                        fontSize: {
+                          xs: "10px",
+                          sm: "12px",
+                          md: "12px",
+                          lg: "14px",
+                          xl: "14px",
+                        },
+                      }}
+                    >
+                      Explore Now!
+                    </Typography>
+                  </div>
+                  <Button>
+                    <ArrowRightAltIcon
+                      sx={{ fontSize: "32px", color: "#797979" }}
+                    />
+                  </Button>
+                </Box>
               </Box>
-              <Box className="men_card_text">
-                <div>
-                  <Typography
-                    sx={{
-                      color: "#2A2F2F",
-                      fontWeight: "700",
-                      fontSize: {
-                        xs: "12px",
-                        sm: "14px",
-                        md: "14px",
-                        lg: "14px",
-                        xl: "18px",
-                      },
-                    }}
-                  >
-                    {men.info}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#797979",
-                      fontWeight: "500",
-                      fontSize: {
-                        xs: "10px",
-                        sm: "12px",
-                        md: "12px",
-                        lg: "14px",
-                        xl: "14px",
-                      },
-                    }}
-                  >
-                    Explore Now!
-                  </Typography>
-                </div>
-                <Button>
-                  <ArrowRightAltIcon
-                    sx={{ fontSize: "32px", color: "#797979" }}
-                  />
-                </Button>
-              </Box>
-            </Box>
-          ))}
+            ))
+          )}
         </Box>
       </Container>
     </MenStyleCss>

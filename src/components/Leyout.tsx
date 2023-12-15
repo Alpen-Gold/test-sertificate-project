@@ -10,7 +10,6 @@ import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import Button from "@mui/material/Button";
-// import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
@@ -23,7 +22,7 @@ import logo from "../assets/img/Logo.png";
 import { NavLink, Outlet } from "react-router-dom";
 import MenuLeyout from "./MenuLeyout";
 
-const pages = ["Home", "Men", "Women", "Combos", "Joggers"];
+const pages = ["Home", "Men", "Women", "Kids"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 //search
@@ -66,21 +65,6 @@ const StyledInputBase = styledm(InputBase)(({ theme }) => ({
   },
 }));
 //seacrh
-
-//
-// import useScrollTrigger from "@mui/material/useScrollTrigger";
-
-// const ElevationScroll = ({ children }) => {
-//   const trigger = useScrollTrigger({
-//     disableHysteresis: true,
-//     threshold: 0,
-//   });
-
-//   return React.cloneElement(children, {
-//     elevation: trigger ? 4 : 0,
-//   });
-// };
-//
 
 function Leyout() {
   const ref = React.useRef(null);
@@ -155,6 +139,7 @@ function Leyout() {
             <Box
               sx={{
                 flexGrow: 1,
+                justifyContent: "center",
                 display: { xs: "none", md: "flex" },
                 ml: { xs: 0, md: 2, xl: 5 },
               }}

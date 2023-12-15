@@ -1,17 +1,26 @@
 import signUpImg from "../../assets/img/and-machines-vqTWfa4DjEk-unsplash 1.png";
-import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { Box, TextField } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { setLocalToken, startLoading } from "../../store/slices/apiSlice";
+import Loading from "../animatin-elements/Loding";
 
-function SignUn() {
+function SignUp() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerPasswordPrev, setRegisterPasswordPrev] = useState("");
   const [number, setNumber] = useState("");
+
+  const loading = useSelector(
+    (state: RootState) => state.apiSliceProducts.loading
+  );
+  const dispatch = useDispatch();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +30,7 @@ function SignUn() {
   const ucerR = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    console.log(registerEmail, registerPassword, registerPasswordPrev);
+    dispatch(startLoading(true));
 
     try {
       const response = await axios.post(
@@ -34,19 +43,52 @@ function SignUn() {
         }
       );
 
+      console.log(response);
+
       if (
         response.status === 200 &&
         registerPassword === registerPasswordPrev
       ) {
-        toast.success("Good job 🥳");
-        setTimeout(() => {
-          navigate("/home");
-        }, 2000);
+        ucerL();
       } else {
         toast.error("Sorry, write it right!");
       }
     } catch (error) {
       console.log(error);
+      toast.error("Sorry, write it right!");
+    } finally {
+      dispatch(startLoading(false));
+    }
+  };
+
+  const ucerL = async () => {
+    dispatch(startLoading(true));
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/shop/users/login",
+        {
+          email: registerEmail,
+          password: registerPassword,
+        }
+      );
+
+      console.log("login respons", response);
+
+      if (response.status === 200) {
+        dispatch(setLocalToken(response.data.token));
+
+        toast.success("Good job 🥳");
+
+        setTimeout(() => {
+          navigate("/home");
+        }, 2000);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Sorry, write it right!");
+    } finally {
+      dispatch(startLoading(false));
     }
   };
 
@@ -148,8 +190,16 @@ function SignUn() {
                 />
               </div>
 
-              <button className="all-button register_btn" onClick={ucerR}>
-                Registration
+              <button
+                className="all-button register_btn"
+                onClick={ucerR}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {loading ? <Loading /> : "Registration"}
               </button>
             </form>
           </div>
@@ -160,4 +210,4 @@ function SignUn() {
   );
 }
 
-export default SignUn;
+export default SignUp;

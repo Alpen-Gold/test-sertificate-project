@@ -5,10 +5,19 @@ import { Box, TextField } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Loading from "../animatin-elements/Loding";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { startLoading } from "../../store/slices/apiSlice";
 
 function SignIn() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+
+  const loading = useSelector(
+    (state: RootState) => state.apiSliceProducts.loading
+  );
+  const dispatch = useDispatch();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -17,6 +26,7 @@ function SignIn() {
 
   const ucerR = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    dispatch(startLoading(true));
 
     try {
       const response = await axios.post(
@@ -36,6 +46,8 @@ function SignIn() {
     } catch (error) {
       console.log(error);
       toast.error("Sorry, write it right!");
+    } finally {
+      dispatch(startLoading(false));
     }
   };
 
@@ -97,8 +109,17 @@ function SignIn() {
                 </a>
               </div>
 
-              <button className="all-button " onClick={ucerR}>
-                Sign In
+              <button
+                className="all-button "
+                onClick={ucerR}
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {loading ? <Loading /> : "Sign In"}
               </button>
 
               <Box sx={{ mt: "10px" }}>

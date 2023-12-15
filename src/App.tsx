@@ -37,6 +37,7 @@ function App() {
           <Route path="sign-up" element={<SignUp />}></Route>
           <Route path="sign-in" element={<SignIn />}></Route>
         </Route>
+
         <Route path="/leyout-admin" element={<LeyoutAdmin />}>
           <Route index element={<ProductPage />}></Route>
           <Route path="product" element={<ProductPage />}></Route>
