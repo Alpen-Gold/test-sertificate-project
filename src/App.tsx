@@ -17,7 +17,18 @@ import CartBuyPage from "./components/pages/in_cart_page/cartBuyPage";
 import WomenPage from "./components/pages/womenPage";
 import FullInfoProduct from "./components/pages/fullInfoBrend";
 import UsersPage from "./admin-components/Pages/UserPage";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 function App() {
   return (
     <>
@@ -49,6 +60,7 @@ function App() {
         <Route path="*" element={<NotAdminPage />}></Route>
       </Routes>
 
+      <ScrollToTop />
       {/* <AppWrapper>
     </AppWrapper> */}
     </>

@@ -5,12 +5,14 @@ export interface CounterState {
   value: number;
   token: string | null;
   loading: boolean;
+  productsData: object;
 }
 
 const initialState: CounterState = {
   value: 0,
   token: localStorage.getItem("userShopToken") || null,
   loading: false,
+  productsData: [],
 };
 
 export const counterSlice = createSlice({
@@ -43,6 +45,10 @@ export const counterSlice = createSlice({
     startLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
+
+    setProducts: (state, action: PayloadAction<object>) => {
+      state.productsData = action.payload;
+    },
   },
 });
 
@@ -52,6 +58,7 @@ export const {
   incrementByAmount,
   setLocalToken,
   startLoading,
+  setProducts,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

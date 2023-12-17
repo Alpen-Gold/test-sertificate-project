@@ -139,8 +139,8 @@ function MenLeyout() {
           component="nav"
           aria-label="mailbox folders"
         >
-          {clothes.map((cloth) => (
-            <ListItem>
+          {clothes.map((cloth, index) => (
+            <ListItem key={index}>
               <ListItemText primary={cloth} />
               <Button>
                 <ChevronRightIcon />
@@ -226,8 +226,8 @@ function MenLeyout() {
                 flexWrap: "wrap",
               }}
             >
-              {colors.map((color) => (
-                <Box className="main_box">
+              {colors.map((color, index) => (
+                <Box className="main_box" key={index}>
                   <Box className="in_main_box">
                     <ListItemButton
                       sx={{
@@ -272,8 +272,8 @@ function MenLeyout() {
                   flexWrap: "wrap",
                 }}
               >
-                {btnSize.map((size) => (
-                  <Button variant="outlined" className="btn_size">
+                {btnSize.map((size, indexOf) => (
+                  <Button variant="outlined" className="btn_size" key={indexOf}>
                     {size}
                   </Button>
                 ))}
@@ -305,8 +305,8 @@ function MenLeyout() {
               component="nav"
               aria-label="mailbox folders"
             >
-              {dressStyle.map((dress) => (
-                <ListItem>
+              {dressStyle.map((dress, index) => (
+                <ListItem key={index}>
                   <ListItemText primary={dress} />
                   <Button>
                     <ChevronRightIcon />

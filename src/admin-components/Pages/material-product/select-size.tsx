@@ -37,11 +37,18 @@ export default function SelectSizeProduct({ setItemForm }) {
     const {
       target: { value },
     } = event;
+
     setSizeName(typeof value === "string" ? value.split(",") : value);
 
-    setItemForm((old: object) => ({
-      ...old,
-      size: sizeName,
+    console.log(sizeName);
+
+    setItemForm((e: object) => ({
+      ...e,
+      size: [
+        sizeName.map((item: string) => {
+          return { name: item };
+        }),
+      ],
     }));
   };
 

@@ -1,5 +1,4 @@
 // icons
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
 import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import ProductCard from "./material-product/ProductCard";
@@ -17,6 +16,7 @@ import { Box } from "@mui/material";
 function ProductPage() {
   const [activeLineCube, setActiveLineCube] = useState(true);
   const [dataProducts, setDataProduct] = useState([]);
+  const [itemSearch, setItemSearch] = useState("");
   const dispatch = useDispatch();
   const loading = useSelector(
     (state: RootState) => state.apiSliceProducts.loading
@@ -69,9 +69,12 @@ function ProductPage() {
 
   const deleteProduct = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:3000/shop/products/${id}`);
+      const response = await axios.delete(
+        `http://localhost:3000/shop/products/${id}`
+      );
 
       repeatData();
+      return response;
     } catch (error) {
       alert(error);
     }
@@ -86,14 +89,15 @@ function ProductPage() {
           <FormModalProduct />
         </div>
         <div className="app-content-actions">
-          <input className="search-bar" placeholder="Search..." type="text" />
+          <input
+            className="search-bar"
+            placeholder="Search..."
+            type="text"
+            value={itemSearch}
+            onChange={(e) => setItemSearch(e.target.value)}
+          />
           <div className="app-content-actions-wrapper">
             <div className="filter-button-wrapper">
-              <button className="action-button filter jsFilter">
-                <span>Filter</span>
-
-                <FilterAltOutlinedIcon />
-              </button>
               <div className="filter-menu">
                 <label>Category</label>
                 <select>
@@ -139,10 +143,11 @@ function ProductPage() {
           }
         >
           <div className="products-header" id="salom">
-            <div className="product-cell image">Foto/Views</div>
-            <div className="product-cell category">Category</div>
-            <div className="product-cell status-cell">Status</div>
-            <div className="product-cell sales">Sales</div>
+            <div className="product-cell image">Foto/Rating</div>
+            <div className="product-cell category">Name</div>
+            <div className="product-cell status-cell">Brand</div>
+            <div className="product-cell sales">Sizes</div>
+            <div className="product-cell sales">Colors</div>
             <div className="product-cell stock">Stock</div>
             <div className="product-cell price">Price</div>
             <div className="product-cell price">Active</div>
@@ -162,13 +167,17 @@ function ProductPage() {
               <Loading />
             </Box>
           ) : (
-            dataProducts.map((item, index: number) => (
-              <ProductCard
-                item={item}
-                key={index}
-                deleteProduct={deleteProduct}
-              />
-            ))
+            dataProducts
+              .filter((oldItem: { name: string }) =>
+                oldItem.name.toLowerCase().includes(itemSearch.toLowerCase())
+              )
+              .map((item, index: number) => (
+                <ProductCard
+                  item={item}
+                  key={index}
+                  deleteProduct={deleteProduct}
+                />
+              ))
           )}
 
           {/* Product Page end */}

@@ -1,5 +1,4 @@
 // icons
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
 import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import styled from "@emotion/styled";
@@ -15,7 +14,8 @@ import CateogoryCard from "./material-category/CategryCard";
 
 function CategoryPage() {
   const [activeLineCube, setActiveLineCube] = useState(true);
-  const [dataProducts, setDataProduct] = useState([]);
+  const [dataCategory, setDataCategory] = useState([]);
+  const [itemSearch, setItemSearch] = useState("");
   const dispatch = useDispatch();
   const loading = useSelector(
     (state: RootState) => state.apiSliceProducts.loading
@@ -35,7 +35,7 @@ function CategoryPage() {
           }
         );
 
-        setDataProduct(response.data);
+        setDataCategory(response.data);
 
         console.log(response, "salom");
       } catch (error) {
@@ -48,11 +48,33 @@ function CategoryPage() {
     fetchProduct();
   }, []);
 
-  const deleteProduct = async (id: string) => {
+  const repeatData = async () => {
+    dispatch(startLoading(true));
+
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/shop/categories",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("userShopToken")}`,
+          },
+        }
+      );
+
+      setDataCategory(response.data);
+    } catch (error) {
+      alert(error);
+    } finally {
+      dispatch(startLoading(false));
+    }
+  };
+
+  const deleteCategory = async (id: string) => {
     try {
       await axios.delete(`http://localhost:3000/shop/categories/${id}`);
 
-      // repeatData();
+      setItemSearch("");
+      repeatData();
     } catch (error) {
       alert(error);
     }
@@ -63,17 +85,18 @@ function CategoryPage() {
         <div className="app-content-header">
           <h1 className="app-content-headerText">Category</h1>
 
-          <FormModalCategory />
+          <FormModalCategory repeatData={repeatData} />
         </div>
         <div className="app-content-actions">
-          <input className="search-bar" placeholder="Search..." type="text" />
+          <input
+            className="search-bar"
+            placeholder="Search..."
+            type="text"
+            value={itemSearch}
+            onChange={(e) => setItemSearch(e.target.value)}
+          />
           <div className="app-content-actions-wrapper">
             <div className="filter-button-wrapper">
-              <button className="action-button filter jsFilter">
-                <span>Filter</span>
-
-                <FilterAltOutlinedIcon />
-              </button>
               <div className="filter-menu">
                 <label>Category</label>
                 <select>
@@ -82,7 +105,6 @@ function CategoryPage() {
                   <option>Kitchen</option>
                   <option>Bathroom</option>
                 </select>
-                <label>Status</label>
                 <select>
                   <option>All Status</option>
                   <option>Active</option>
@@ -121,7 +143,6 @@ function CategoryPage() {
           <div className="products-header">
             <div className="product-cell image">Items</div>
             <div className="product-cell category">Name</div>
-            <div className="product-cell status-cell">Status</div>
             <div className="product-cell sales">Gender</div>
             <div className="product-cell stock">Stock</div>
           </div>
@@ -139,15 +160,19 @@ function CategoryPage() {
               <Loading />
             </Box>
           ) : (
-            dataProducts.map((item, index: number) => (
-              <CateogoryCard
-                item={item}
-                key={index}
-                deleteProduct={deleteProduct}
-              />
-            ))
+            dataCategory
+              .filter((oldItem: { name: string }) =>
+                oldItem.name.toLowerCase().includes(itemSearch.toLowerCase())
+              )
+              .map((item, index: number) => (
+                <CateogoryCard
+                  repeatData={repeatData}
+                  item={item}
+                  key={index}
+                  deleteCategory={deleteCategory}
+                />
+              ))
           )}
-
           {/* Product Page end */}
         </div>
       </div>

@@ -13,6 +13,7 @@ import UserCard from "./material-user/UserCard";
 function UsersPage() {
   const [activeLineCube, setActiveLineCube] = useState(true);
   const [dataProducts, setDataProduct] = useState([]);
+  const [itemSearch, setItemSearch] = useState("");
   const dispatch = useDispatch();
   const loading = useSelector(
     (state: RootState) => state.apiSliceProducts.loading
@@ -83,7 +84,13 @@ function UsersPage() {
           <h1 className="app-content-headerText">Users</h1>
         </div>
         <div className="app-content-actions">
-          <input className="search-bar" placeholder="Search..." type="text" />
+          <input
+            className="search-bar"
+            placeholder="Search..."
+            type="text"
+            value={itemSearch}
+            onChange={(e) => setItemSearch(e.target.value)}
+          />
           <div className="app-content-actions-wrapper">
             <div className="filter-button-wrapper">
               <div className="filter-menu">
@@ -153,9 +160,13 @@ function UsersPage() {
           ) : (
             <>
               {/* Product Page */}
-              {dataProducts.map((item, index: number) => (
-                <UserCard item={item} key={index} deleteUser={deleteUser} />
-              ))}
+              {dataProducts
+                .filter((oldItem: { name: string }) =>
+                  oldItem.name.toLowerCase().includes(itemSearch.toLowerCase())
+                )
+                .map((item, index: number) => (
+                  <UserCard item={item} key={index} deleteUser={deleteUser} />
+                ))}
               {/* Product Page end */}
             </>
           )}

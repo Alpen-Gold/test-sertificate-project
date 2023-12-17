@@ -1,6 +1,7 @@
 // icons
 import DeleteIcon from "@mui/icons-material/Delete";
 import ConstructionIcon from "@mui/icons-material/Construction";
+import StarIcon from "@mui/icons-material/Star";
 import { Box } from "@mui/material";
 
 interface Category {
@@ -10,6 +11,16 @@ interface Category {
   __v: number;
   id: string;
 }
+
+type TypeSize = {
+  _id: string;
+  name: string;
+};
+
+type TypeColors = {
+  _id: string;
+  name: string;
+};
 
 interface Product {
   image: string;
@@ -32,34 +43,43 @@ interface Product {
 
 interface UserCardProps {
   item: Product;
-  deleteProduct: (userId: string) => void; // Masalan, foydalanuvchi ID'sini o'chirish funktsiyasi
+  deleteProduct: (userId: string) => void;
 }
 
 function ProductCard({ item, deleteProduct }: UserCardProps) {
   return (
     <div className="products-row">
       <div className="product-cell image">
-        <img
-          src={
-            "https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njd8fGludGVyaW9yfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
-          }
-          alt="product"
-        />
-        <span>{item.numReviews ? item.numReviews : 0}</span>
+        <img src={item?.image} alt="product" />
+        <Box sx={{ display: "flex", alignItems: "center", gap: "7px" }}>
+          {item.rating ? item.rating : 0}
+          <StarIcon sx={{ fontSize: "17px", color: "gold" }} />
+        </Box>
       </div>
+
       <div className="product-cell category">
         <span className="cell-label">Category:</span> {item.category.name}
       </div>
+
       <div className="product-cell status-cell">
         <span className="cell-label">Brans:</span>
         <span className="status active">{item.brand}</span>
       </div>
+
       <div className="product-cell sales">
         <span className="cell-label">Size:</span>
-        {item.size?.map((size: string, index: number) => {
-          return <span key={index}>{size}</span>;
+        {item.size?.map((size: TypeSize, index: number) => {
+          return <span key={index}>{size.name},</span>;
         })}
       </div>
+
+      <div className="product-cell sales">
+        <span className="cell-label">Size:</span>
+        {item.color?.map((color: TypeColors, index: number) => {
+          return <span key={index}>{color.name},</span>;
+        })}
+      </div>
+
       <div className="product-cell stock">
         <span className="cell-label">Stock:</span>
         {item.count}
@@ -84,7 +104,7 @@ function ProductCard({ item, deleteProduct }: UserCardProps) {
           </button>
 
           <button
-            onClick={() => deleteProduct(String(item.id))}
+            onClick={() => deleteProduct(String(item._id))}
             className="all-button-active"
             style={{
               padding: "5px",

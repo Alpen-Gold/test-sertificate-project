@@ -24,12 +24,14 @@ import SelectSizeProduct from "./select-size";
 
 interface ItemFormType {
   name: string | null;
-  color: string;
+  color: object[];
   image: string | null | object | undefined;
   size: string | null;
   category: string | null;
   count: number | null | string;
   price: number | null | string;
+  rating: number | null | string;
+  isFeatured: boolean | null;
 }
 function FormModalProduct() {
   const [open, setOpen] = useState(false);
@@ -39,24 +41,66 @@ function FormModalProduct() {
   const [selectedIndex, setSelectedIndex] = useState(1);
   const [itemForm, setItemForm] = useState<ItemFormType>({
     name: null,
-    color: "White",
+    color: [],
     image: null,
     size: null,
     category: null,
     count: null,
     price: null,
+    rating: null,
+    isFeatured: null,
   });
 
-  const cateogries = ["Paypoqlar", "Qastumlar", "Shorts"];
+  const cateogries = ["Paypoqlar", "Shirts", "Shorts"];
 
   const addNewProductBtn = async () => {
     console.log(itemForm);
 
     try {
-      await axios.post("http://localhost:3000/shop/categories", {
-        ...itemForm,
-        rating: 2,
+      const response = await axios.post("http://localhost:3000/shop/products", {
+        name: "test",
+        color: [
+          {
+            name: "black",
+          },
+          {
+            name: "white",
+          },
+          {
+            name: "grey",
+          },
+          {
+            name: "blue",
+          },
+        ],
+        size: [
+          {
+            name: "XS",
+          },
+          {
+            name: "S",
+          },
+          {
+            name: "M",
+          },
+          {
+            name: "L",
+          },
+        ],
+        image: `http://localhost:3000/public/uploads/${String(
+          itemForm?.image
+        )}`,
+        brand: "Helen",
+        price: 85,
+        category: {
+          name: "Shirts",
+          gender: "male",
+        },
+        count: 85,
+        isFeatured: "true",
       });
+
+      return response;
     } catch (error) {
       alert(error);
     }
@@ -64,10 +108,16 @@ function FormModalProduct() {
     setOpen(false);
   };
 
-  const handleChangeColor = (event: string) => {
+  const handleChangeColor = (event: string | object) => {
+    console.log(event);
+
     setItemForm((e) => ({
       ...e,
-      color: event,
+      color: [
+        event.map((item: string) => {
+          return { name: item };
+        }),
+      ],
     }));
 
     setSelectOpenColor(!selectOpenColor);
@@ -148,6 +198,52 @@ function FormModalProduct() {
               setItemForm((old: ItemFormType) => ({
                 ...old,
                 count: Number(e.target.value),
+              }));
+            }}
+            sx={{
+              borderBottom: "2px solid white",
+              color: "white",
+              "& .css-1x51dt5-MuiInputBase-input-MuiInput-input": {
+                color: "white",
+              },
+            }}
+          />
+
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            placeholder="Rating..."
+            type="number"
+            fullWidth
+            variant="standard"
+            onChange={(e) => {
+              setItemForm((old: ItemFormType) => ({
+                ...old,
+                rating: Number(e.target.value),
+              }));
+            }}
+            sx={{
+              borderBottom: "2px solid white",
+              color: "white",
+              "& .css-1x51dt5-MuiInputBase-input-MuiInput-input": {
+                color: "white",
+              },
+            }}
+          />
+
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            placeholder="Featured..."
+            type="number"
+            fullWidth
+            variant="standard"
+            onChange={(e) => {
+              setItemForm((old: ItemFormType) => ({
+                ...old,
+                isFeatured: Boolean(e.target.value),
               }));
             }}
             sx={{
@@ -260,6 +356,7 @@ function FormModalProduct() {
                     const reader = new FileReader();
 
                     reader.onloadend = () => {
+                      console.log(reader.result);
                       setItemForm((old) => ({
                         ...old,
                         image: reader.result,

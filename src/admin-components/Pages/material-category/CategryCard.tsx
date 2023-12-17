@@ -1,7 +1,19 @@
 // icons
 import DeleteIcon from "@mui/icons-material/Delete";
 import ConstructionIcon from "@mui/icons-material/Construction";
-import { Box } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { startLoading } from "../../../store/slices/apiSlice";
+import axios from "axios";
 
 interface Product {
   _id: string;
@@ -13,16 +25,53 @@ interface Product {
 
 interface UserCardProps {
   item: Product;
-  deleteProduct: (userId: string) => void;
+  deleteCategory: (userId: string) => void;
+  repeatData: () => void;
 }
 
-function CateogoryCard({ item, deleteProduct }: UserCardProps) {
+function CateogoryCard({ item, deleteCategory, repeatData }: UserCardProps) {
+  const [open, setOpen] = useState(false);
+  const [itemName, setItemName] = useState("");
+  const [itemGender, setItemGender] = useState("");
+  const dispatch = useDispatch();
+
+  const handleClickOpen = () => {
+    setItemName(item.name);
+    setItemGender(item.gender);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const editCategory = async () => {
+    dispatch(startLoading(true));
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/shop/categories/${item._id}`,
+        {
+          name: itemName,
+          gender: itemGender,
+        }
+      );
+
+      repeatData();
+      setOpen(false);
+      return response;
+    } catch (error) {
+      alert(error);
+    } finally {
+      dispatch(startLoading(false));
+    }
+  };
   return (
     <div className="products-row">
       <div className="product-cell image">
         <img
           src={
-            "https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njd8fGludGVyaW9yfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
+            "https://i0.wp.com/textilelearner.net/wp-content/uploads/2023/01/Market-Research-in-Fashion-Industry.jpg?fit=664%2C400&ssl=1"
           }
           alt="product"
         />
@@ -32,20 +81,15 @@ function CateogoryCard({ item, deleteProduct }: UserCardProps) {
         <span className="cell-label">Category:</span> {item.name}
       </div>
       <div className="product-cell status-cell">
-        <span className="cell-label">Status:</span>
-        <span className="status active">Active or isActive</span>
-      </div>
-
-      <div className="product-cell stock">
         <span className="cell-label">Gender:</span>
-        {item.gender}
+        <span className="status active"> {item.gender}</span>
       </div>
 
       <div className="product-cell price">
         <span className="cell-label">Active:</span>
         <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <button
-            // onClick={() => deleteUser(String(item.id))}
+            onClick={() => handleClickOpen()}
             className="all-button-active"
             style={{
               padding: "5px",
@@ -58,7 +102,7 @@ function CateogoryCard({ item, deleteProduct }: UserCardProps) {
           </button>
 
           <button
-            onClick={() => deleteProduct(String(item.id))}
+            onClick={() => deleteCategory(String(item._id))}
             className="all-button-active"
             style={{
               padding: "5px",
@@ -71,6 +115,59 @@ function CateogoryCard({ item, deleteProduct }: UserCardProps) {
           </button>
         </Box>
       </div>
+
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle sx={{ bgcolor: "#101827", color: "white" }}>
+          Add new cateogry +
+        </DialogTitle>
+        <DialogContent sx={{ bgcolor: "#101827" }}>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            placeholder="Category New Name..."
+            type="text"
+            fullWidth
+            value={itemName}
+            onChange={(e) => setItemName(e.target.value)}
+            variant="standard"
+            sx={{
+              borderBottom: "2px solid white",
+              color: "white",
+              "& .css-1x51dt5-MuiInputBase-input-MuiInput-input": {
+                color: "white",
+              },
+            }}
+          />
+
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            placeholder="Gender New Name..."
+            type="text"
+            fullWidth
+            value={itemGender}
+            onChange={(e) => setItemGender(e.target.value)}
+            variant="standard"
+            sx={{
+              borderBottom: "2px solid white",
+              color: "white",
+              "& .css-1x51dt5-MuiInputBase-input-MuiInput-input": {
+                color: "white",
+              },
+            }}
+          />
+        </DialogContent>
+        <DialogActions sx={{ bgcolor: "#101827" }}>
+          <Button onClick={() => setOpen(false)} sx={{ color: "white" }}>
+            Cancel
+          </Button>
+          <Button onClick={editCategory} sx={{ color: "white" }}>
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
@@ -10,13 +9,22 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { startLoading } from "../../../store/slices/apiSlice";
+import axios from "axios";
 
-function FormModalCategory() {
+interface UserCardProps {
+  repeatData: () => void;
+}
+
+function FormModalCategory({ repeatData }: UserCardProps) {
   const [open, setOpen] = useState(false);
   const [itemForm, setItemForm] = useState({
     name: "",
-    image: "",
+    gender: "",
   });
+
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     setOpen(false);
@@ -26,8 +34,23 @@ function FormModalCategory() {
     setOpen(true);
   };
 
-  const addNewCategory = () => {
-    console.log(itemForm);
+  const addNewCategory = async () => {
+    dispatch(startLoading(true));
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/shop/categories",
+        itemForm
+      );
+
+      repeatData();
+      setOpen(false);
+      return response;
+    } catch (error) {
+      alert(error);
+    } finally {
+      dispatch(startLoading(false));
+    }
   };
 
   return (
@@ -63,38 +86,28 @@ function FormModalCategory() {
             }}
           />
 
-          <div id="profile-upload">
-            <Box className="hvr-profile-img">
-              <input
-                id="imag"
-                type="file"
-                name="logo"
-                onChange={(e) => {
-                  const file = e?.target?.files ? e?.target?.files[0] : null;
-                  if (file) {
-                    const reader = new FileReader();
-
-                    reader.onloadend = () => {
-                      setItemForm((old) => ({
-                        ...old,
-                        image: String(reader.result),
-                      }));
-                    };
-                    reader.readAsDataURL(file);
-                  }
-                }}
-                className="upload w180"
-                title="Dimensions 180 X 180"
-              />
-              {itemForm.image && (
-                <img
-                  src={String(itemForm?.image)}
-                  alt="Selected"
-                  className="imgformproduct"
-                />
-              )}
-            </Box>
-          </div>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            placeholder="Gender Name..."
+            type="email"
+            fullWidth
+            onChange={(e) =>
+              setItemForm((old) => ({
+                ...old,
+                gender: e.target.value,
+              }))
+            }
+            variant="standard"
+            sx={{
+              borderBottom: "2px solid white",
+              color: "white",
+              "& .css-1x51dt5-MuiInputBase-input-MuiInput-input": {
+                color: "white",
+              },
+            }}
+          />
         </DialogContent>
         <DialogActions sx={{ bgcolor: "#101827" }}>
           <Button onClick={handleClose} sx={{ color: "white" }}>
