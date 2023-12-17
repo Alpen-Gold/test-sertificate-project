@@ -2,25 +2,87 @@
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
 import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
-import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import ProductCard from "../ProductCard";
+import ProductCard from "./material-product/ProductCard";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import FormModalProduct from "./modals-product/product-modal";
+import FormModalProduct from "./material-product/product-modal";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { startLoading } from "../../store/slices/apiSlice";
+import axios from "axios";
+import Loading from "../../components/animatin-elements/Loding";
+import { Box } from "@mui/material";
 
 function ProductPage() {
   const [activeLineCube, setActiveLineCube] = useState(true);
+  const [dataProducts, setDataProduct] = useState([]);
+  const dispatch = useDispatch();
+  const loading = useSelector(
+    (state: RootState) => state.apiSliceProducts.loading
+  );
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      dispatch(startLoading(true));
+
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/shop/products",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("userShopToken")}`,
+            },
+          }
+        );
+
+        setDataProduct(response.data);
+
+        console.log(response, "salom");
+      } catch (error) {
+        alert(error);
+      } finally {
+        dispatch(startLoading(false));
+      }
+    };
+
+    fetchProduct();
+  }, []);
+
+  const repeatData = async () => {
+    dispatch(startLoading(true));
+
+    try {
+      const response = await axios.get("http://localhost:3000/shop/products", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userShopToken")}`,
+        },
+      });
+
+      setDataProduct(response.data);
+    } catch (error) {
+      alert(error);
+    } finally {
+      dispatch(startLoading(false));
+    }
+  };
+
+  const deleteProduct = async (id: string) => {
+    try {
+      await axios.delete(`http://localhost:3000/shop/products/${id}`);
+
+      repeatData();
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   return (
     <div className="app-content">
       <ProductPageWrapper>
         <div className="app-content-header">
           <h1 className="app-content-headerText">Products</h1>
-          <button className="mode-switch" title="Switch Theme">
-            <DarkModeOutlinedIcon />
-          </button>
+
           <FormModalProduct />
         </div>
         <div className="app-content-actions">
@@ -77,48 +139,39 @@ function ProductPage() {
           }
         >
           <div className="products-header" id="salom">
-            <div className="product-cell image">Items</div>
+            <div className="product-cell image">Foto/Views</div>
             <div className="product-cell category">Category</div>
             <div className="product-cell status-cell">Status</div>
             <div className="product-cell sales">Sales</div>
             <div className="product-cell stock">Stock</div>
             <div className="product-cell price">Price</div>
+            <div className="product-cell price">Active</div>
           </div>
 
           {/* Product Page */}
-          <ProductCard />
-          {/* Product Page end */}
 
-          {/* product status active page  */}
-          <div className="products-row">
-            <button className="cell-more-button">
-              <MoreVertOutlinedIcon />
-            </button>
-            <div className="product-cell image">
-              <img
-                src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                alt="product"
+          {loading ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "20px 0",
+              }}
+            >
+              <Loading />
+            </Box>
+          ) : (
+            dataProducts.map((item, index: number) => (
+              <ProductCard
+                item={item}
+                key={index}
+                deleteProduct={deleteProduct}
               />
-              <span>Boheme</span>
-            </div>
-            <div className="product-cell category">
-              <span className="cell-label">Category:</span>Furniture
-            </div>
-            <div className="product-cell status-cell">
-              <span className="cell-label">Status:</span>
-              <span className="status active">Active</span>
-            </div>
-            <div className="product-cell sales">
-              <span className="cell-label">Sales:</span>32
-            </div>
-            <div className="product-cell stock">
-              <span className="cell-label">Stock:</span>40
-            </div>
-            <div className="product-cell price">
-              <span className="cell-label">Price:</span>$350
-            </div>
-          </div>
-          {/* product status active page end */}
+            ))
+          )}
+
+          {/* Product Page end */}
         </div>
 
         {/* Modal Add New Product */}

@@ -46,48 +46,22 @@ function FormModalProduct() {
     count: null,
     price: null,
   });
-  const colors = [
-    "Red",
-    "Black",
-    "Blue",
-    "Orange",
-    "Yellow",
-    "Green",
-    "Purple",
-    "Pink",
-    "Brown",
-    "Gray",
-    "Silver",
-    "Gold",
-    "Cyan",
-    "Magenta",
-    "Indigo",
-    "Turquoise",
-    "Lime",
-    "Maroon",
-    "Teal",
-    "Olive",
-  ];
+
   const cateogries = ["Paypoqlar", "Qastumlar", "Shorts"];
 
   const addNewProductBtn = async () => {
     console.log(itemForm);
 
     try {
-      const respons = await axios.post("url", itemForm);
-
-      console.log(respons);
-
-      return respons;
+      await axios.post("http://localhost:3000/shop/categories", {
+        ...itemForm,
+        rating: 2,
+      });
     } catch (error) {
       alert(error);
     }
 
     setOpen(false);
-  };
-
-  const handleToggleClick = () => {
-    setSelectOpenColor(!selectOpenColor);
   };
 
   const handleChangeColor = (event: string) => {
@@ -129,7 +103,7 @@ function FormModalProduct() {
 
   return (
     <>
-      <button className="app-content-headerButton" onClick={handleClickOpen}>
+      <button className="all-button-active" onClick={handleClickOpen}>
         Add Product
       </button>
       <Dialog open={open} onClose={handleClose}>
@@ -160,23 +134,6 @@ function FormModalProduct() {
             }}
           />
 
-          {/* <Box className={`custom-select ${selectOpenColor ? "open" : ""}`}>
-            <div className="btn-toggle" onClick={handleToggleClick}>
-              <input type="button" value={itemForm.color || "Let's drop"} />
-            </div>
-            <ul className={`drop-items ${selectOpenColor ? "active" : ""}`}>
-              {colors.map((color) => (
-                <li
-                  key={color}
-                  className="item"
-                  onClick={() => handleChangeColor(color)}
-                >
-                  {color}
-                </li>
-              ))}
-            </ul>
-          </Box> */}
-
           <SelectColorProduct handleChangeColor={handleChangeColor} />
 
           <TextField
@@ -190,7 +147,7 @@ function FormModalProduct() {
             onChange={(e) => {
               setItemForm((old: ItemFormType) => ({
                 ...old,
-                count: e.target.value,
+                count: Number(e.target.value),
               }));
             }}
             sx={{
@@ -213,7 +170,7 @@ function FormModalProduct() {
             onChange={(e) => {
               setItemForm((old) => ({
                 ...old,
-                price: e.target.value,
+                price: Number(e.target.value),
               }));
             }}
             sx={{

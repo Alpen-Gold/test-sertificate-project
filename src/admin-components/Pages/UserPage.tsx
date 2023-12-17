@@ -1,4 +1,3 @@
-// icons
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
 import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import styled from "@emotion/styled";
@@ -9,7 +8,7 @@ import { RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/material";
 import Loading from "../../components/animatin-elements/Loding";
-import UserCard from "../UserCard";
+import UserCard from "./material-user/UserCard";
 
 function UsersPage() {
   const [activeLineCube, setActiveLineCube] = useState(true);

@@ -110,14 +110,13 @@ function MenLeyout() {
   };
 
   return (
-    <MenStyle>
+    <MenStyle className="body">
       <Box
         sx={{
           width: "100%",
           maxWidth: 300,
           border: "2px solid #BEBCBD77",
           borderTop: "0",
-          height: "100%",
         }}
       >
         <Box
@@ -323,6 +322,9 @@ function MenLeyout() {
 }
 
 const MenStyle = styled.div`
+  .body {
+    height: 100%;
+  }
   .btn_price_control {
     color: #3c4242;
     border: 2px solid #bebcbd;
