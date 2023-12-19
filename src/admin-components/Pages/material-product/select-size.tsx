@@ -29,7 +29,9 @@ function getStyles(name: string, sizeName: readonly string[], theme: Theme) {
   };
 }
 
-export default function SelectSizeProduct({ setItemForm }) {
+export default function SelectSizeProduct({
+  setItemForm,
+}: SelectSizeProductProps) {
   const theme = useTheme();
   const [sizeName, setSizeName] = React.useState<string[]>([]);
 

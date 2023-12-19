@@ -1,23 +1,7 @@
 import * as React from "react";
-import { Theme, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+import styled from "@emotion/styled";
+import { Box, SelectChangeEvent } from "@mui/material";
+import { useState } from "react";
 
 const names = [
   "Purple",
@@ -33,69 +17,124 @@ const names = [
   "Pink",
   "Blue",
 ];
-function getStyles(name: string, colorName: readonly string[], theme: Theme) {
-  return {
-    fontWeight:
-      colorName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
+
+interface UserCardProps {
+  handleChangeColor: (userId: string | object) => void;
 }
 
-export default function SelectColorProduct({ handleChangeColor }) {
-  const theme = useTheme();
-  const [colorName, setColorName] = React.useState<string[]>([]);
+function SelectColorProduct({ handleChangeColor }: UserCardProps) {
+  const [colorName, setColorName] = useState<{ name: string }[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof colorName>) => {
-    const {
-      target: { value },
-    } = event;
-    setColorName(typeof value === "string" ? value.split(",") : value);
+    setColorName((oldItem) => [
+      ...oldItem,
+      {
+        name: String(event.target.value),
+      },
+    ]);
+
+    console.log(colorName);
 
     handleChangeColor(colorName);
   };
-
   return (
-    <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-chip-label" sx={{ color: "white" }}>
-          Colors
-        </InputLabel>
-        <Select
-          sx={{ color: "white" }}
-          labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
-          multiple
-          value={colorName}
-          onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-          renderValue={(selected) => (
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 0.5,
-                color: "white",
-              }}
-            >
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, colorName, theme)}
-            >
+    <ColorsWrapper>
+      <label className="select">
+        <select onChange={handleChange}>
+          {names.map((name, index) => (
+            <option value={name} key={index}>
               {name}
-            </MenuItem>
+            </option>
           ))}
-        </Select>
-      </FormControl>
-    </div>
+
+          <option value="1">Pure CSS Select</option>
+          <option value="2">With wrapper</option>
+          <option value="3">No JS!</option>
+        </select>
+      </label>
+
+      <Box>
+        <ul>
+          {colorName.map((item, index) => {
+            return (
+              <li key={index} style={{ color: "white" }}>
+                {item.name}
+              </li>
+            );
+          })}
+        </ul>
+      </Box>
+    </ColorsWrapper>
   );
 }
+
+export default SelectColorProduct;
+
+const ColorsWrapper = styled.div`
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    outline: 0;
+    background: none;
+    color: inherit;
+    box-shadow: none;
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+
+  /* Custom Select wrapper */
+  .select {
+    position: relative;
+    display: flex;
+    width: 100%;
+    background: var(--background-select);
+    border-radius: 0.25rem;
+    overflow: hidden;
+  }
+  .select select {
+    flex: 1;
+    padding: 1em;
+    cursor: pointer;
+  }
+  .select::after {
+    content: "▼";
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    transition: 0.25s all ease;
+    pointer-events: none;
+  }
+  .select:hover::after {
+    color: #f39c12;
+    -webkit-animation: bounce 0.5s infinite;
+    animation: bounce 0.5s infinite;
+  }
+
+  @-webkit-keyframes bounce {
+    25% {
+      transform: translatey(5px);
+    }
+    75% {
+      transform: translatey(-5px);
+    }
+  }
+
+  @keyframes bounce {
+    25% {
+      transform: translatey(5px);
+    }
+    75% {
+      transform: translatey(-5px);
+    }
+  }
+`;

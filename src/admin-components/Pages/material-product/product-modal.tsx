@@ -1,7 +1,7 @@
 // icons
 
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import {
   Box,
@@ -21,15 +21,17 @@ import {
 } from "@mui/material";
 import SelectColorProduct from "./select-color";
 import SelectSizeProduct from "./select-size";
+import { useDispatch } from "react-redux";
+import { startLoading } from "../../../store/slices/apiSlice";
 
 interface ItemFormType {
   name: string | null;
-  color: object[];
+  color: [];
   image: string | null | object | undefined;
-  size: string | null;
-  category: string | null;
-  count: number | null | string;
-  price: number | null | string;
+  size: object | null;
+  category: object | null;
+  count: number | null;
+  price: number | null;
   rating: number | null | string;
   isFeatured: boolean | null;
 }
@@ -39,11 +41,12 @@ function FormModalProduct() {
   const [openCategorySelect, setOpenCategorySelect] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
+  const [dataCategory, setDataCategory] = useState([]);
   const [itemForm, setItemForm] = useState<ItemFormType>({
     name: null,
     color: [],
     image: null,
-    size: null,
+    size: [],
     category: null,
     count: null,
     price: null,
@@ -51,54 +54,48 @@ function FormModalProduct() {
     isFeatured: null,
   });
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      dispatch(startLoading(true));
+
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/shop/categories",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("userShopToken")}`,
+            },
+          }
+        );
+
+        setDataCategory(response.data);
+
+        console.log(response, "category");
+      } catch (error) {
+        alert(error);
+      } finally {
+        dispatch(startLoading(false));
+      }
+    };
+
+    fetchProduct();
+  }, []);
+
   const cateogries = ["Paypoqlar", "Shirts", "Shorts"];
 
   const addNewProductBtn = async () => {
     console.log(itemForm);
 
     try {
-      const response = await axios.post("http://localhost:3000/shop/products", {
-        name: "test",
-        color: [
-          {
-            name: "black",
-          },
-          {
-            name: "white",
-          },
-          {
-            name: "grey",
-          },
-          {
-            name: "blue",
-          },
-        ],
-        size: [
-          {
-            name: "XS",
-          },
-          {
-            name: "S",
-          },
-          {
-            name: "M",
-          },
-          {
-            name: "L",
-          },
-        ],
-        image: `http://localhost:3000/public/uploads/${String(
-          itemForm?.image
-        )}`,
-        brand: "Helen",
-        price: 85,
-        category: {
-          name: "Shirts",
-          gender: "male",
-        },
-        count: 85,
-        isFeatured: "true",
-      });
+      const response = await axios.postForm(
+        "http://localhost:3000/shop/products",
+        {
+          ...itemForm,
+          image: document.querySelector("#imag")?.files[0],
+        }
+      );
 
       return response;
     } catch (error) {
@@ -109,18 +106,13 @@ function FormModalProduct() {
   };
 
   const handleChangeColor = (event: string | object) => {
-    console.log(event);
+    console.log(event, "salom");
 
-    setItemForm((e) => ({
-      ...e,
-      color: [
-        event.map((item: string) => {
-          return { name: item };
-        }),
-      ],
+    setItemForm(() => ({
+      ...itemForm,
+      color: Object(event),
     }));
 
-    setSelectOpenColor(!selectOpenColor);
     console.log(itemForm, "salom");
   };
 
@@ -131,14 +123,16 @@ function FormModalProduct() {
   const handleMenuItemClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
     index: number,
-    category: string
+    category: { name: string; gender: string }
   ) => {
-    console.log(event);
-
-    setItemForm((e) => ({
-      ...e,
-      category: category,
+    setItemForm((prevItemForm) => ({
+      ...prevItemForm,
+      category: {
+        name: category.name,
+        gender: category.gender,
+      },
     }));
+
     setSelectedIndex(index);
     setOpenCategorySelect(false);
   };
@@ -325,18 +319,26 @@ function FormModalProduct() {
                 <Paper>
                   <ClickAwayListener onClickAway={handleClose}>
                     <MenuList id="split-button-menu" autoFocusItem>
-                      {cateogries.map((option, index) => (
-                        <MenuItem
-                          key={option}
-                          // disabled={index === 2}
-                          selected={index === selectedIndex}
-                          onClick={(event) =>
-                            handleMenuItemClick(event, index, option)
-                          }
-                        >
-                          {option}
-                        </MenuItem>
-                      ))}
+                      {dataCategory.map(
+                        (
+                          option: {
+                            name: string;
+                            genders: string;
+                          },
+                          index
+                        ) => (
+                          <MenuItem
+                            key={option.name}
+                            // disabled={index === 2}
+                            selected={index === selectedIndex}
+                            onClick={(event) =>
+                              handleMenuItemClick(event, index, option)
+                            }
+                          >
+                            {option.name}
+                          </MenuItem>
+                        )
+                      )}
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>

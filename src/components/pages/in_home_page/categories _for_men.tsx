@@ -2,15 +2,6 @@ import { Box, Button, Typography, Container } from "@mui/material";
 import styled from "styled-components";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-// img_men_page
-import men_card_1 from "../../../assets/img/men_card_1.png";
-import men_card_2 from "../../../assets/img/men_card_2.png";
-import men_card_3 from "../../../assets/img/men_card_3.png";
-import men_card_4 from "../../../assets/img/men_card_4.png";
-import men_card_5 from "../../../assets/img/men_card_5.png";
-import men_card_6 from "../../../assets/img/men_card_6.png";
-import men_card_7 from "../../../assets/img/men_card_7.png";
-import men_card_8 from "../../../assets/img/men_card_8.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,40 +10,40 @@ import { startLoading } from "../../../store/slices/apiSlice";
 import Loading from "../../animatin-elements/Loding";
 // img_men_page
 
-const MenData = [
-  {
-    img: men_card_1,
-    info: "Shirts",
-  },
-  {
-    img: men_card_2,
-    info: "Printed T-Shirts",
-  },
-  {
-    img: men_card_3,
-    info: "Plain T-Shirt",
-  },
-  {
-    img: men_card_4,
-    info: "Polo T-Shirt",
-  },
-  {
-    img: men_card_5,
-    info: "Hoodies & Sweetshirt",
-  },
-  {
-    img: men_card_6,
-    info: "Jeans",
-  },
-  {
-    img: men_card_7,
-    info: "Activewear",
-  },
-  {
-    img: men_card_8,
-    info: "Boxers",
-  },
-];
+// const MenData = [
+//   {
+//     img: men_card_1,
+//     info: "Shirts",
+//   },
+//   {
+//     img: men_card_2,
+//     info: "Printed T-Shirts",
+//   },
+//   {
+//     img: men_card_3,
+//     info: "Plain T-Shirt",
+//   },
+//   {
+//     img: men_card_4,
+//     info: "Polo T-Shirt",
+//   },
+//   {
+//     img: men_card_5,
+//     info: "Hoodies & Sweetshirt",
+//   },
+//   {
+//     img: men_card_6,
+//     info: "Jeans",
+//   },
+//   {
+//     img: men_card_7,
+//     info: "Activewear",
+//   },
+//   {
+//     img: men_card_8,
+//     info: "Boxers",
+//   },
+// ];
 
 const card_width = {
   xs: "48%",
@@ -123,10 +114,8 @@ function CardMenPage() {
           ) : (
             dataProducts.map((men, index) => (
               <Box sx={{ width: card_width }} key={index}>
-                {console.log(men)}
-                <Box>
-                  <img src={men.image} className="img" />
-                </Box>
+                {/* {console.log(men)} */}
+                <Box>{/* <img src={men.image} className="img" /> */}</Box>
                 <Box className="men_card_text">
                   <div>
                     <Typography
@@ -142,7 +131,7 @@ function CardMenPage() {
                         },
                       }}
                     >
-                      {men.name}
+                      {/* {men.name} */}
                     </Typography>
                     <Typography
                       sx={{

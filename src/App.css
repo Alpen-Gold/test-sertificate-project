@@ -266,3 +266,9 @@ a {
 #profile-upload:hover .fa:after {
   height: 100%;
 }
+
+/* select colors modal */
+:root {
+  --background: linear-gradient(30deg, #8a33fd 30%, #8a33fd);
+  --background-select: linear-gradient(to left, #34495e 3rem, #2c3e50 3rem);
+}
